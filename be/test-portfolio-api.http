@@ -1,0 +1,98 @@
+### Portfolio CMS API Test Dosyası
+
+### 1. Tüm portfolio verilerini getir
+GET https://localhost:7155/api/portfolio
+Accept: application/json
+
+### 2. Kişisel bilgileri güncelle
+PUT https://localhost:7155/api/portfolio/personal
+Content-Type: application/json
+
+{
+  "fullName": "Enes Gedik",
+  "title": "Frontend Developer",
+  "profileImage": "/images/profile.jpg",
+  "cvDownloadLink": "/files/cv.pdf",
+  "welcomeMessage": "Merhaba! Ben Enes, passionate bir frontend geliştiricisiyim."
+}
+
+### 3. Hakkımda bölümünü güncelle
+PUT https://localhost:7155/api/portfolio/about
+Content-Type: application/json
+
+{
+  "description": "3+ yıllık deneyime sahip frontend developer. Modern web teknolojileri ile kullanıcı dostu arayüzler geliştiriyorum.",
+  "skills": ["React", "JavaScript", "TypeScript", "Next.js", "CSS", "SCSS"],
+  "yearsExperience": 3,
+  "projectsCompleted": 15
+}
+
+### 4. Yeni proje ekle
+POST https://localhost:7155/api/portfolio/projects
+Content-Type: application/json
+
+{
+  "title": "Portfolio CMS",
+  "description": "Next.js ve C# ile geliştirilmiş modern portfolio yönetim sistemi",
+  "imageUrl": "/images/portfolio-cms.jpg",
+  "projectUrl": "https://portfolio-cms.demo.com",
+  "githubUrl": "https://github.com/user/portfolio-cms",
+  "technologies": ["Next.js", "C#", "JSON", "SCSS"],
+  "isActive": true
+}
+
+### 5. Projeleri listele
+GET https://localhost:7155/api/portfolio/projects
+Accept: application/json
+
+### 6. Proje güncelle (ID: 1)
+PUT https://localhost:7155/api/portfolio/projects/1
+Content-Type: application/json
+
+{
+  "title": "E-Ticaret Platformu (Güncellenmiş)",
+  "description": "Responsive ve modern tasarıma sahip e-ticaret uygulaması",
+  "imageUrl": "/images/ecommerce-updated.jpg",
+  "projectUrl": "https://ecommerce.demo.com",
+  "githubUrl": "https://github.com/user/ecommerce",
+  "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+  "isActive": true
+}
+
+### 7. Tema ayarlarını güncelle
+PUT https://localhost:7155/api/portfolio/theme
+Content-Type: application/json
+
+{
+  "primaryColor": "#2563eb",
+  "secondaryColor": "#64748b",
+  "backgroundColor": "#f8fafc",
+  "textColor": "#1e293b",
+  "fontFamily": "Inter, system-ui, sans-serif",
+  "darkMode": false
+}
+
+### 8. Tema ayarlarını getir
+GET https://localhost:7155/api/portfolio/theme
+Accept: application/json
+
+### 9. İletişim bilgilerini güncelle
+PUT https://localhost:7155/api/portfolio/contact
+Content-Type: application/json
+
+{
+  "email": "enes@example.com",
+  "phone": "+90 555 123 45 67",
+  "location": "İstanbul, Türkiye",
+  "social": {
+    "linkedin": "linkedin.com/in/enesgedik",
+    "github": "github.com/enesgedik",
+    "twitter": "twitter.com/enesgedik",
+    "instagram": "instagram.com/enesgedik",
+    "website": "https://enesgedik.dev"
+  }
+}
+
+### 10. Proje sil (ID: 1)
+DELETE https://localhost:7155/api/portfolio/projects/1
+Accept: application/json 

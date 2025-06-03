@@ -1,0 +1,160 @@
+.container {
+  min-height: 80vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  border-bottom: 2px solid #eee;
+
+  h1 {
+    color: #333;
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.tableContainer {
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+
+  @media (max-width: 768px) {
+    overflow-x: auto;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  button {
+    font-size: 12px;
+    padding: 6px 12px;
+    min-width: auto;
+    
+    @media (max-width: 768px) {
+      font-size: 11px;
+      padding: 5px 8px;
+    }
+  }
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+
+  button {
+    min-width: 100px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// Responsive table improvements
+@media (max-width: 768px) {
+  .tableContainer {
+    font-size: 14px;
+    
+    table {
+      th, td {
+        padding: 8px;
+        
+        &:nth-child(3), // Email
+        &:nth-child(5) { // City
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .tableContainer {
+    font-size: 12px;
+    
+    table {
+      th, td {
+        padding: 6px;
+        
+        &:nth-child(4) { // Age
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// Loading state improvements
+.loading {
+  .spinner {
+    border-width: 3px;
+  }
+}
+
+// Form improvements
+.modal {
+  .modal-content {
+    @media (max-width: 480px) {
+      width: 95%;
+      padding: 20px;
+      margin: 10px;
+    }
+  }
+  
+  .form-group {
+    input {
+      transition: all 0.3s ease;
+      
+      &:focus {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// Alert positioning
+.alert {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 
