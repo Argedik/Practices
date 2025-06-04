@@ -1,0 +1,59 @@
+{
+  "personal": {
+    "fullName": "John Doe",
+    "title": "Full Stack Developer",
+    "profileImage": "/images/profile.jpg",
+    "cvDownloadLink": "",
+    "welcomeMessage": "Merhaba! Ben bir yaz\u0131l\u0131m geli\u015Ftiricisiyim."
+  },
+  "about": {
+    "description": "5\u002B y\u0131ll\u0131k deneyime sahip passionate bir yaz\u0131l\u0131m geli\u015Ftiricisiyim.",
+    "skills": [
+      "C#",
+      "JavaScript",
+      "React",
+      "Node.js",
+      "SQL"
+    ],
+    "yearsExperience": 5,
+    "projectsCompleted": 25
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "E-Ticaret Platformu",
+      "description": "Modern bir e-ticaret uygulamas\u0131",
+      "imageUrl": "/images/project1.jpg",
+      "projectUrl": "",
+      "githubUrl": "",
+      "technologies": [
+        "React",
+        "Node.js",
+        "MongoDB"
+      ],
+      "createdDate": "2025-03-04T07:59:22.0616294+03:00",
+      "isActive": true
+    }
+  ],
+  "experiences": [],
+  "contact": {
+    "email": "john@example.com",
+    "phone": "\u002B90 555 123 45 67",
+    "location": "\u0130stanbul, T\u00FCrkiye",
+    "social": {
+      "linkedIn": "linkedin.com/in/johndoe",
+      "gitHub": "github.com/johndoe",
+      "twitter": "",
+      "instagram": "",
+      "website": ""
+    }
+  },
+  "theme": {
+    "primaryColor": "#007bff",
+    "secondaryColor": "#6c757d",
+    "backgroundColor": "#ffffff",
+    "textColor": "#333333",
+    "fontFamily": "Inter, sans-serif",
+    "darkMode": false
+  }
+}
