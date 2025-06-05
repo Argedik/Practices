@@ -55,6 +55,22 @@ public class PortfolioController : ControllerBase
         }
     }
 
+    // Kişisel bilgileri getir
+    [HttpGet("personal")]
+    public async Task<ActionResult<PersonalInfo>> GetPersonalInfo()
+    {
+        try
+        {
+            var data = await _dataService.GetPortfolioDataAsync();
+            return Ok(data.Personal);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting personal info");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     // Hakkımda bölümünü güncelle
     [HttpPut("about")]
     public async Task<ActionResult> UpdateAboutMe([FromBody] AboutMe aboutMe)
@@ -73,6 +89,22 @@ public class PortfolioController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error updating about me");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    // Hakkımda bilgilerini getir
+    [HttpGet("about")]
+    public async Task<ActionResult<AboutMe>> GetAboutMe()
+    {
+        try
+        {
+            var data = await _dataService.GetPortfolioDataAsync();
+            return Ok(data.About);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting about me");
             return StatusCode(500, "Internal server error");
         }
     }
@@ -217,6 +249,22 @@ public class PortfolioController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error updating contact info");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    // İletişim bilgilerini getir
+    [HttpGet("contact")]
+    public async Task<ActionResult<ContactInfo>> GetContactInfo()
+    {
+        try
+        {
+            var data = await _dataService.GetPortfolioDataAsync();
+            return Ok(data.Contact);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting contact info");
             return StatusCode(500, "Internal server error");
         }
     }
