@@ -1,0 +1,27 @@
+{
+  "isOnePageSite": false,
+  "pageOrder": [
+    "Hero",
+    "Skills",
+    "Projects",
+    "Career",
+    "Contact"
+  ],
+  "navigationStyle": "click",
+  "layoutOptions": {
+    "imagePosition": "background",
+    "textPosition": "right",
+    "gridMode": false,
+    "fixedAreaEnabled": false,
+    "fixedAreaPosition": 3
+  },
+  "selectedTags": {
+    "siteType": [
+      "skills"
+    ],
+    "navigation": [],
+    "layout": [],
+    "pageOrder": []
+  },
+  "lastUpdated": "2025-06-08 16:59:50"
+}

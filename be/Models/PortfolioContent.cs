@@ -86,3 +86,14 @@ public class ThemeSettings
     public string FontFamily { get; set; } = "Inter, sans-serif";
     public bool DarkMode { get; set; } = false;
 } 
+
+// Kullanıcı modeli
+public class UserModel
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = "";
+    public string Email { get; set; } = "";
+    public int Age { get; set; }
+    public string City { get; set; } = "";
+    public DateTime CreatedDate { get; set; } = DateTime.Now;
+} 

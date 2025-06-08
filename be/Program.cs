@@ -8,8 +8,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Portfolio Data Service'i ekle
-builder.Services.AddScoped<PortfolioDataService>();
+// Content Service'i ekle
+builder.Services.AddScoped<ContentService>();
 
 // CORS ayarları - Frontend ile iletişim için
 builder.Services.AddCors(options =>

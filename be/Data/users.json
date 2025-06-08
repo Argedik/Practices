@@ -1,0 +1,26 @@
+[
+  {
+    "id": 2,
+    "name": "Ay\u015Fe Gedik",
+    "email": "ayse@example.com",
+    "age": 30,
+    "city": "Ankara",
+    "createdDate": "2025-05-18T09:47:11.468537+03:00"
+  },
+  {
+    "id": 3,
+    "name": "teest Kaya",
+    "email": "mehmet@example.com",
+    "age": 32,
+    "city": "\u0130zmir",
+    "createdDate": "2025-05-28T09:47:11.468538+03:00"
+  },
+  {
+    "id": 4,
+    "name": "test",
+    "email": "qwdq@hotmail.com",
+    "age": 12,
+    "city": "1212",
+    "createdDate": "2025-06-07T10:07:17.238101+03:00"
+  }
+]
