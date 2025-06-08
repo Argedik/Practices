@@ -1,3 +1,14 @@
+// User Types
+export interface UserModel {
+	id: number;
+	name: string;
+	email: string;
+	age: number;
+	city: string;
+	createdDate: string;
+}
+
+// Legacy User interface for backward compatibility
 export interface User {
 	id: number;
 	name: string;
@@ -18,6 +29,7 @@ export interface AlertData {
 	message: string;
 }
 
+// Portfolio Types
 export interface PortfolioPersonal {
 	fullName: string;
 	title: string;
@@ -50,4 +62,16 @@ export interface PortfolioData {
 	personal: PortfolioPersonal;
 	contact: PortfolioContact;
 	about: PortfolioAbout;
+}
+
+// UI Component Props Types
+export interface UserManagementProps {
+	users: UserModel[];
+	loading: boolean;
+	selectedUser: UserModel | null;
+	onAddUser: (userData: Omit<UserModel, 'id' | 'createdDate'>) => Promise<void>;
+	onUpdateUser: (userData: UserModel) => Promise<void>;
+	onDeleteUser: (id: number) => Promise<void>;
+	onEditUser: (user: UserModel) => void;
+	onCancelEdit: () => void;
 }

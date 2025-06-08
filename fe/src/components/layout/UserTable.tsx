@@ -1,11 +1,11 @@
 import React from 'react';
-import { User } from '../../types';
+import { UserModel } from '../../types';
 import { Button } from '../ui/Button';
 import styles from './UserTable.module.scss';
 
 interface UserTableProps {
-	users: User[];
-	onEdit: (user: User) => void;
+	users: UserModel[];
+	onEdit: (user: UserModel) => void;
 	onDelete: (id: number) => void;
 }
 

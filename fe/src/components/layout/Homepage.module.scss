@@ -1,0 +1,176 @@
+.homepage {
+	margin: 0 auto;
+	padding: 2rem;
+	min-height: 80vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 3rem;
+
+	h1 {
+		font-size: 2.5rem;
+		color: #2c3e50;
+		margin-bottom: 1rem;
+		font-weight: 700;
+	}
+
+	p {
+		color: #7f8c8d;
+		font-size: 1.2rem;
+		max-width: 600px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+}
+
+.cardGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 2rem;
+	flex: 1;
+	align-content: start;
+}
+
+.card {
+	background: white;
+	border-radius: 16px;
+	padding: 2rem;
+	text-decoration: none;
+	color: inherit;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+	border: 2px solid transparent;
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	position: relative;
+	overflow: hidden;
+
+	&:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+	}
+
+	&.blue {
+		border-left: 5px solid #3498db;
+		&:hover {
+			border-color: #3498db;
+			background: linear-gradient(135deg, #f8fbff 0%, #e3f2fd 100%);
+		}
+	}
+
+	&.green {
+		border-left: 5px solid #2ecc71;
+		&:hover {
+			border-color: #2ecc71;
+			background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+		}
+	}
+
+	&.purple {
+		border-left: 5px solid #9b59b6;
+		&:hover {
+			border-color: #9b59b6;
+			background: linear-gradient(135deg, #fdf8ff 0%, #f3e5f5 100%);
+		}
+	}
+}
+
+.cardIcon {
+	font-size: 3rem;
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(52, 152, 219, 0.1);
+	border-radius: 50%;
+	flex-shrink: 0;
+	transition: all 0.3s ease;
+}
+
+.cardContent {
+	flex: 1;
+
+	h3 {
+		margin: 0 0 0.75rem 0;
+		font-size: 1.4rem;
+		color: #2c3e50;
+		font-weight: 600;
+	}
+
+	p {
+		margin: 0;
+		color: #7f8c8d;
+		line-height: 1.5;
+		font-size: 1rem;
+	}
+}
+
+.cardArrow {
+	font-size: 1.8rem;
+	color: #bdc3c7;
+	transition: all 0.3s ease;
+	font-weight: bold;
+}
+
+.card:hover .cardArrow {
+	color: #3498db;
+	transform: translateX(8px);
+}
+
+.card:hover .cardIcon {
+	transform: scale(1.1);
+	background: rgba(52, 152, 219, 0.2);
+}
+
+.footer {
+	text-align: center;
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 1px solid #ecf0f1;
+
+	p {
+		color: #95a5a6;
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.homepage {
+		padding: 1rem;
+	}
+
+	.header {
+		margin-bottom: 2rem;
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		p {
+			font-size: 1rem;
+		}
+	}
+
+	.cardGrid {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	.card {
+		padding: 1.5rem;
+		flex-direction: column;
+		text-align: center;
+		gap: 1rem;
+	}
+
+	.cardIcon {
+		width: 60px;
+		height: 60px;
+		font-size: 2.5rem;
+	}
+}

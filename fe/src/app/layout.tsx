@@ -1,38 +1,64 @@
-import type { Metadata } from "next";
-import "./globals.scss";
+'use client';
 
-export const metadata: Metadata = {
-  title: "Excel CRUD Uygulaması",
-  description: "Excel dosyası üzerinde CRUD işlemleri yapabileceğiniz uygulama",
-};
+import './globals.scss';
+import { ReactNode, useState } from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../store';
+import { Sidebar } from '../components/navigation/Sidebar';
+import { HoverDetector } from '../components/navigation/HoverDetector';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
-    <html lang="tr">
-      <body>
-        <header style={{ 
-          backgroundColor: '#007bff', 
-          color: 'white', 
-          padding: '1rem 0',
-          marginBottom: '2rem'
-        }}>
-          <div className="container">
-            <h1 style={{ margin: 0, fontSize: '1.5rem' }}>
-              📊 Excel CRUD Uygulaması
-            </h1>
-            <p style={{ margin: '0.5rem 0 0 0', opacity: 0.9 }}>
-              Excel dosyası üzerinde kullanıcı yönetimi
-            </p>
-          </div>
-        </header>
-        <main className="container">
-          {children}
-        </main>
-      </body>
-    </html>
-  );
+interface RootLayoutProps {
+	children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
+	const [sidebarVisible, setSidebarVisible] = useState(true);
+
+	const handleToggleSidebar = () => {
+		setSidebarVisible(!sidebarVisible);
+	};
+
+	const handleShowSidebar = () => {
+		setSidebarVisible(true);
+	};
+
+	const mainStyle: React.CSSProperties = {
+		marginLeft: sidebarVisible ? '17%' : '0',
+		transition: 'margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+		minHeight: '100vh',
+		background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+	};
+
+	const contentStyle: React.CSSProperties = {
+		width: '100%',
+	};
+
+	return (
+		<html lang="tr">
+			<head>
+				<title>Portfolio CMS - Modern İçerik Yönetimi</title>
+				<meta
+					name="description"
+					content="Modern portfolio ve içerik yönetim sistemi"
+				/>
+			</head>
+			<body suppressHydrationWarning={true}>
+				<Provider store={store}>
+					{/* Sidebar */}
+					<Sidebar isVisible={sidebarVisible} onToggle={handleToggleSidebar} />
+
+					{/* Hover Detector */}
+					<HoverDetector
+						isVisible={sidebarVisible}
+						onShow={handleShowSidebar}
+					/>
+
+					{/* Main Content */}
+					<main style={mainStyle}>
+						<div style={contentStyle}>{children}</div>
+					</main>
+				</Provider>
+			</body>
+		</html>
+	);
 }

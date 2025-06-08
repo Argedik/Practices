@@ -1,73 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { User, FormData } from '../../types';
-import { useUsers } from '../../hooks/useUsers';
-import { Alert } from '../ui/Alert';
+import React, { useState } from 'react';
+import { UserModel, FormData, UserManagementProps } from '../../types';
 import { Button } from '../ui/Button';
 import { Loading } from '../ui/Loading';
 import { UserTable } from './UserTable';
 import { UserForm } from '../forms/UserForm';
 import styles from './UserManagement.module.scss';
 
-export const UserManagement: React.FC = () => {
-	const {
-		users,
-		loading,
-		alert,
-		fetchUsers,
-		createUser,
-		updateUser,
-		deleteUser,
-	} = useUsers();
-
+/**
+ * Pure Component - SOLID Prensipleri:
+ * - Single Responsibility: Sadece UI rendering
+ * - Open/Closed: Props interface ile genişletilebilir
+ * - Dependency Inversion: Container'dan props alır
+ */
+export const UserManagement: React.FC<UserManagementProps> = ({
+	users,
+	loading,
+	selectedUser,
+	onAddUser,
+	onUpdateUser,
+	onDeleteUser,
+	onEditUser,
+	onCancelEdit,
+}) => {
 	const [showModal, setShowModal] = useState(false);
-	const [editingUser, setEditingUser] = useState<User | null>(null);
 
-	useEffect(() => {
-		fetchUsers();
-	}, [fetchUsers]);
-
-	const handleEdit = (user: User) => {
-		setEditingUser(user);
+	const handleEdit = (user: UserModel) => {
+		onEditUser(user);
 		setShowModal(true);
 	};
 
 	const handleDelete = async (id: number) => {
-		await deleteUser(id);
+		await onDeleteUser(id);
 	};
 
 	const handleFormSubmit = async (
 		userData: FormData,
 		isEdit: boolean
 	): Promise<boolean> => {
-		if (isEdit && editingUser) {
-			const userToUpdate: User = {
-				id: editingUser.id,
-				name: userData.name,
-				email: userData.email,
-				age: parseInt(userData.age),
-				city: userData.city,
-			};
-			return await updateUser(userToUpdate);
-		} else {
-			const newUser = {
-				name: userData.name,
-				email: userData.email,
-				age: parseInt(userData.age),
-				city: userData.city,
-			};
-			return await createUser(newUser);
+		try {
+			if (isEdit && selectedUser) {
+				const userToUpdate: UserModel = {
+					...selectedUser,
+					name: userData.name,
+					email: userData.email,
+					age: parseInt(userData.age),
+					city: userData.city,
+				};
+				await onUpdateUser(userToUpdate);
+			} else {
+				const newUser = {
+					name: userData.name,
+					email: userData.email,
+					age: parseInt(userData.age),
+					city: userData.city,
+				};
+				await onAddUser(newUser);
+			}
+			closeModal();
+			return true;
+		} catch {
+			return false;
 		}
 	};
 
 	const closeModal = () => {
 		setShowModal(false);
-		setEditingUser(null);
+		onCancelEdit();
 	};
 
 	return (
 		<div className={styles.container}>
-			{alert && <Alert alert={alert} />}
-
 			<div className={styles.header}>
 				<h1>Kullanıcı Yönetimi</h1>
 				<Button variant="primary" onClick={() => setShowModal(true)}>
@@ -83,7 +85,7 @@ export const UserManagement: React.FC = () => {
 
 			{showModal && (
 				<UserForm
-					editingUser={editingUser}
+					editingUser={selectedUser}
 					onSubmit={handleFormSubmit}
 					onClose={closeModal}
 				/>
