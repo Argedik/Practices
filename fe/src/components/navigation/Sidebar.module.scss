@@ -1,0 +1,159 @@
+.sidebar {
+	width: 300px;
+	height: 100vh;
+	background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+	color: #f1f5f9;
+	position: fixed;
+	left: -300px;
+	top: 0;
+	z-index: 1000;
+	transition: left 0.3s ease;
+	overflow-y: auto;
+	border-right: 1px solid #475569;
+	box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.sidebarOpen {
+	left: 0;
+}
+
+.content {
+	padding: 1rem;
+}
+
+.header {
+	padding: 1.5rem 1rem;
+	border-bottom: 1px solid #475569;
+	background: rgba(15, 23, 42, 0.8);
+}
+
+.title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #f1f5f9;
+	margin: 0;
+	text-align: center;
+}
+
+.subtitle {
+	font-size: 0.9rem;
+	color: #94a3b8;
+	text-align: center;
+	margin: 0.5rem 0 0 0;
+}
+
+.section {
+	margin-bottom: 2rem;
+}
+
+.sectionTitle {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #cbd5e1;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.menuItem {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+	margin-bottom: 0.5rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	color: #e2e8f0;
+	text-decoration: none;
+}
+
+.menuItem:hover {
+	background: rgba(59, 130, 246, 0.1);
+	color: #60a5fa;
+	transform: translateX(4px);
+}
+
+.menuItemActive {
+	background: rgba(59, 130, 246, 0.2);
+	color: #60a5fa;
+	border-left: 3px solid #3b82f6;
+}
+
+.menuIcon {
+	font-size: 1.2rem;
+	min-width: 20px;
+}
+
+.menuText {
+	font-size: 0.95rem;
+	font-weight: 500;
+}
+
+.toggle {
+	position: fixed;
+	left: 20px;
+	top: 20px;
+	z-index: 1001;
+	background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+	color: white;
+	border: none;
+	border-radius: 12px;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	font-size: 1.5rem;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.toggle:hover {
+	transform: scale(1.1);
+	box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+}
+
+.overlayVisible {
+	opacity: 1;
+	visibility: visible;
+}
+
+.badge {
+	background: #ef4444;
+	color: white;
+	font-size: 0.7rem;
+	padding: 0.2rem 0.5rem;
+	border-radius: 10px;
+	margin-left: auto;
+}
+
+.divider {
+	height: 1px;
+	background: #475569;
+	margin: 1rem 0;
+}
+
+.footer {
+	margin-top: auto;
+	padding: 1rem;
+	border-top: 1px solid #475569;
+	background: rgba(15, 23, 42, 0.5);
+}
+
+.footerText {
+	font-size: 0.8rem;
+	color: #64748b;
+	text-align: center;
+}

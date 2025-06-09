@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 import { HeroSection } from '../sections/HeroSection';
 import { SkillsSection } from '../sections/SkillsSection';
@@ -77,67 +76,6 @@ export const Homepage = () => {
 				color: '#f1f5f9',
 			}}
 		>
-			{/* Üst Bar - Admin Panel Linki */}
-			<div
-				style={{
-					position: 'fixed',
-					top: '20px',
-					right: '20px',
-					zIndex: 1000,
-					display: 'flex',
-					gap: '10px',
-				}}
-			>
-				<Link
-					href="/admin"
-					style={{
-						backgroundColor: '#1e293b',
-						color: '#f1f5f9',
-						padding: '10px 20px',
-						borderRadius: '25px',
-						textDecoration: 'none',
-						fontSize: '14px',
-						boxShadow: '0 2px 10px rgba(0,0,0,0.5)',
-						border: '1px solid #334155',
-					}}
-				>
-					⚙️ Admin Panel
-				</Link>
-				<div
-					style={{
-						backgroundColor: '#f59e0b',
-						color: '#0f172a',
-						padding: '10px 20px',
-						borderRadius: '25px',
-						fontSize: '14px',
-						boxShadow: '0 2px 10px rgba(0,0,0,0.5)',
-						fontWeight: '600',
-					}}
-				>
-					✨ Inline Editing Aktif
-				</div>
-			</div>
-
-			{/* Hoşgeldin Mesajı */}
-			<div
-				style={{
-					backgroundColor: '#1e293b',
-					padding: '1rem',
-					margin: '2rem 0',
-					borderRadius: '8px',
-					border: '1px solid #f59e0b',
-				}}
-			>
-				<h2 style={{ color: '#f59e0b', margin: '0 0 0.5rem 0' }}>
-					🎉 Yeni Inline Editing Sistemi!
-				</h2>
-				<p style={{ margin: 0, color: '#cbd5e1' }}>
-					Artık metin ve görsellere <strong>direkt tıklayarak</strong>{' '}
-					düzenleyebilirsiniz. Mouse ile üzerine geldiğinizde düzenleme ve silme
-					butonları görünecek.
-				</p>
-			</div>
-
 			{/* Portfolio Bölümleri */}
 			<div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 				<HeroSection

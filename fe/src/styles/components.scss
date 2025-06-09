@@ -1,0 +1,506 @@
+// ================================
+// MERKEZI COMPONENT STİLLERİ
+// ================================
+// Tüm butonlar, formlar ve UI elementleri için standart sınıflar
+
+// ================================
+// BUTON STİLLERİ
+// ================================
+
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-md) var(--spacing-xl);
+	border-radius: var(--radius-lg);
+	font-weight: var(--font-medium);
+	font-size: var(--font-sm);
+	line-height: var(--leading-normal);
+	font-family: var(--font-primary);
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: var(--transition-normal);
+	text-decoration: none;
+	user-select: none;
+	outline: none;
+
+	&:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	// Ana buton (Primary)
+	&--primary {
+		background: var(--gradient-orange);
+		color: var(--text-dark);
+		border-color: var(--accent-orange);
+
+		&:hover:not(:disabled) {
+			background: var(--accent-orange-dark);
+			transform: translateY(-1px);
+			box-shadow: var(--shadow-lg);
+		}
+
+		&:active {
+			transform: translateY(0);
+		}
+	}
+
+	// İkincil buton (Secondary)
+	&--secondary {
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+		border-color: var(--border-primary);
+
+		&:hover:not(:disabled) {
+			background: var(--bg-tertiary);
+			border-color: var(--border-accent);
+		}
+	}
+
+	// Başarı butonu
+	&--success {
+		background: var(--success-color);
+		color: white;
+
+		&:hover:not(:disabled) {
+			background: var(--success-color-dark);
+		}
+	}
+
+	// Tehlike butonu
+	&--danger {
+		background: var(--danger-color);
+		color: white;
+
+		&:hover:not(:disabled) {
+			background: var(--danger-color-dark);
+		}
+	}
+
+	// Bilgi butonu
+	&--info {
+		background: var(--info-color);
+		color: white;
+
+		&:hover:not(:disabled) {
+			background: var(--info-color-dark);
+		}
+	}
+
+	// Uyarı butonu
+	&--warning {
+		background: var(--warning-color);
+		color: var(--text-dark);
+
+		&:hover:not(:disabled) {
+			background: var(--warning-color-dark);
+		}
+	}
+
+	// Şeffaf buton
+	&--ghost {
+		background: transparent;
+		color: var(--text-accent);
+		border-color: var(--border-accent);
+
+		&:hover:not(:disabled) {
+			background: var(--accent-orange-light);
+		}
+	}
+
+	// Buton boyutları
+	&--small {
+		padding: var(--spacing-sm) var(--spacing-md);
+		font-size: var(--font-xs);
+	}
+
+	&--large {
+		padding: var(--spacing-lg) var(--spacing-2xl);
+		font-size: var(--font-lg);
+	}
+
+	// Tam genişlik buton
+	&--full {
+		width: 100%;
+	}
+
+	// Yuvarlak buton
+	&--rounded {
+		border-radius: var(--radius-full);
+	}
+}
+
+// ================================
+// FORM STİLLERİ
+// ================================
+
+.form-group {
+	margin-bottom: var(--spacing-lg);
+
+	label {
+		display: block;
+		margin-bottom: var(--spacing-sm);
+		font-weight: var(--font-medium);
+		font-size: var(--font-sm);
+		color: var(--text-secondary);
+	}
+
+	.form-input {
+		width: 100%;
+		padding: var(--spacing-md);
+		border: 1px solid var(--border-secondary);
+		border-radius: var(--radius-lg);
+		font-size: var(--font-sm);
+		font-family: var(--font-primary);
+		background-color: var(--bg-secondary);
+		color: var(--text-primary);
+		transition: var(--transition-normal);
+
+		&:focus {
+			outline: none;
+			border-color: var(--border-accent);
+			box-shadow: 0 0 0 2px var(--accent-orange-light);
+		}
+
+		&::placeholder {
+			color: var(--text-muted);
+		}
+
+		&:disabled {
+			background-color: var(--bg-tertiary);
+			opacity: 0.6;
+			cursor: not-allowed;
+		}
+	}
+
+	.form-textarea {
+		@extend .form-input;
+		resize: vertical;
+		min-height: 100px;
+	}
+
+	.form-select {
+		@extend .form-input;
+		cursor: pointer;
+	}
+}
+
+// ================================
+// KART STİLLERİ
+// ================================
+
+.card {
+	background: var(--bg-glass);
+	border: 1px solid var(--border-primary);
+	border-radius: var(--radius-xl);
+	overflow: hidden;
+	transition: var(--transition-normal);
+
+	&:hover {
+		box-shadow: var(--shadow-lg);
+		transform: translateY(-2px);
+	}
+
+	&__header {
+		padding: var(--spacing-lg);
+		border-bottom: 1px solid var(--border-primary);
+		background: var(--bg-glass-light);
+	}
+
+	&__body {
+		padding: var(--spacing-lg);
+	}
+
+	&__footer {
+		padding: var(--spacing-lg);
+		border-top: 1px solid var(--border-primary);
+		background: var(--bg-glass-light);
+	}
+
+	// Kart varyantları
+	&--primary {
+		border-color: var(--border-accent);
+
+		.card__header {
+			background: var(--accent-orange-light);
+		}
+	}
+
+	&--success {
+		border-color: var(--success-border);
+
+		.card__header {
+			background: rgba(40, 167, 69, 0.1);
+		}
+	}
+
+	&--danger {
+		border-color: var(--danger-border);
+
+		.card__header {
+			background: rgba(220, 53, 69, 0.1);
+		}
+	}
+}
+
+// ================================
+// MODAL STİLLERİ
+// ================================
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--bg-overlay);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: var(--z-modal);
+
+	&__content {
+		background-color: var(--bg-secondary);
+		padding: var(--spacing-3xl);
+		border-radius: var(--radius-xl);
+		width: 90%;
+		max-width: 500px;
+		box-shadow: var(--shadow-dark);
+		border: 1px solid var(--border-secondary);
+		max-height: 90vh;
+		overflow-y: auto;
+	}
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--spacing-xl);
+
+		h2 {
+			margin: 0;
+			color: var(--text-primary);
+			font-weight: var(--font-semibold);
+			font-size: var(--font-xl);
+		}
+
+		.close-btn {
+			background: none;
+			border: none;
+			font-size: var(--font-2xl);
+			cursor: pointer;
+			color: var(--text-muted);
+			padding: var(--spacing-sm);
+			border-radius: var(--radius-md);
+			transition: var(--transition-fast);
+
+			&:hover {
+				color: var(--text-primary);
+				background: var(--bg-tertiary);
+			}
+		}
+	}
+
+	&__body {
+		margin-bottom: var(--spacing-xl);
+	}
+
+	&__footer {
+		display: flex;
+		gap: var(--spacing-md);
+		justify-content: flex-end;
+	}
+}
+
+// ================================
+// ALERT STİLLERİ
+// ================================
+
+.alert {
+	padding: var(--spacing-md) var(--spacing-lg);
+	border-radius: var(--radius-lg);
+	margin-bottom: var(--spacing-xl);
+	border: 1px solid;
+	font-size: var(--font-sm);
+
+	&--success {
+		background-color: var(--bg-secondary);
+		color: var(--success-color-light);
+		border-color: var(--success-border);
+	}
+
+	&--danger {
+		background-color: var(--bg-secondary);
+		color: var(--danger-color-light);
+		border-color: var(--danger-border);
+	}
+
+	&--warning {
+		background-color: var(--bg-secondary);
+		color: var(--warning-color);
+		border-color: var(--warning-color-dark);
+	}
+
+	&--info {
+		background-color: var(--bg-secondary);
+		color: var(--info-color);
+		border-color: var(--info-color-dark);
+	}
+}
+
+// ================================
+// TABLO STİLLERİ
+// ================================
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: var(--bg-secondary);
+	border-radius: var(--radius-xl);
+	overflow: hidden;
+	box-shadow: var(--shadow-md);
+
+	th,
+	td {
+		padding: var(--spacing-md);
+		text-align: left;
+		border-bottom: 1px solid var(--border-secondary);
+		color: var(--text-primary);
+	}
+
+	th {
+		background-color: var(--bg-primary);
+		font-weight: var(--font-semibold);
+		color: var(--text-primary);
+		font-size: var(--font-sm);
+	}
+
+	tr:hover {
+		background-color: var(--bg-primary);
+	}
+
+	tr:last-child td {
+		border-bottom: none;
+	}
+}
+
+// ================================
+// YÜKLENİYOR ANIMASYONU
+// ================================
+
+.loading {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 3px solid var(--border-secondary);
+	border-radius: var(--radius-full);
+	border-top-color: var(--accent-orange);
+	animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+// ================================
+// YARDİMCI SINIFLAR
+// ================================
+
+// Metin hizalama
+.text-left {
+	text-align: left;
+}
+.text-center {
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}
+
+// Metin renkleri
+.text-primary {
+	color: var(--text-primary);
+}
+.text-secondary {
+	color: var(--text-secondary);
+}
+.text-muted {
+	color: var(--text-muted);
+}
+.text-accent {
+	color: var(--text-accent);
+}
+.text-success {
+	color: var(--success-color-light);
+}
+.text-danger {
+	color: var(--danger-color-light);
+}
+.text-warning {
+	color: var(--warning-color);
+}
+
+// Arkaplan renkleri
+.bg-primary {
+	background: var(--bg-primary);
+}
+.bg-secondary {
+	background: var(--bg-secondary);
+}
+.bg-white {
+	background: var(--bg-white);
+}
+.bg-glass {
+	background: var(--bg-glass);
+}
+
+// Flexbox yardımcıları
+.flex {
+	display: flex;
+}
+.flex-col {
+	flex-direction: column;
+}
+.items-center {
+	align-items: center;
+}
+.justify-center {
+	justify-content: center;
+}
+.justify-between {
+	justify-content: space-between;
+}
+.justify-end {
+	justify-content: flex-end;
+}
+
+// Spacing yardımcıları
+.m-0 {
+	margin: 0;
+}
+.mt-auto {
+	margin-top: auto;
+}
+.mb-auto {
+	margin-bottom: auto;
+}
+.p-0 {
+	padding: 0;
+}
+
+// Gölge yardımcıları
+.shadow-sm {
+	box-shadow: var(--shadow-sm);
+}
+.shadow-md {
+	box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+	box-shadow: var(--shadow-lg);
+}
+.shadow-xl {
+	box-shadow: var(--shadow-xl);
+}

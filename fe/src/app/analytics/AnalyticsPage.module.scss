@@ -1,0 +1,241 @@
+.analyticsPage {
+	padding: var(--spacing-3xl);
+	background: var(--bg-white);
+	box-shadow: var(--shadow-xl);
+	font-family: var(--font-primary);
+}
+
+.pageTitle {
+	font-size: var(--font-4xl);
+	font-weight: var(--font-bold);
+	background: var(--gradient-blue-purple);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	margin-bottom: var(--spacing-3xl);
+	text-align: center;
+}
+
+.statsGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--spacing-2xl);
+	margin-bottom: var(--spacing-3xl);
+}
+
+.statCard {
+	padding: var(--spacing-3xl);
+	background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-200) 100%);
+	border-radius: var(--radius-xl);
+	text-align: center;
+	border: 1px solid var(--border-light);
+	transition: var(--transition-normal);
+	cursor: pointer;
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow-accent);
+		background: linear-gradient(
+			135deg,
+			var(--gray-100) 0%,
+			var(--gray-200) 100%
+		);
+	}
+}
+
+.statIcon {
+	font-size: var(--font-3xl);
+	margin-bottom: var(--spacing-sm);
+	display: block;
+}
+
+.statValue {
+	font-size: var(--font-3xl);
+	font-weight: var(--font-bold);
+	color: var(--accent-orange);
+	margin-bottom: var(--spacing-xs);
+
+	&.positive {
+		color: var(--success-color);
+	}
+
+	&.warning {
+		color: var(--warning-color);
+	}
+
+	&.danger {
+		color: var(--danger-color);
+	}
+}
+
+.statLabel {
+	color: var(--gray-600);
+	font-size: var(--font-sm);
+	font-weight: var(--font-medium);
+}
+
+.chartPlaceholder {
+	height: 300px;
+	background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+	border-radius: 12px;
+	border: 2px dashed #cbd5e0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4rem;
+	margin-bottom: 2rem;
+	color: #64748b;
+	transition: all 0.3s ease;
+
+	&:hover {
+		border-color: #667eea;
+		background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+		transform: scale(1.02);
+	}
+}
+
+.comingSoonSection {
+	padding: 2rem;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border-radius: 12px;
+	color: white;
+	text-align: center;
+}
+
+.comingSoonTitle {
+	margin: 0 0 1rem 0;
+	font-size: 1.3rem;
+	font-weight: 600;
+}
+
+.comingSoonText {
+	margin: 0;
+	opacity: 0.9;
+	line-height: 1.6;
+}
+
+// Debug Helper Classes - Global Selectors
+:global([data-component='AnalyticsPage']) {
+	position: relative;
+
+	&::before {
+		content: 'AnalyticsPage';
+		position: absolute;
+		top: -20px;
+		left: 0;
+		font-size: 10px;
+		color: #7f8c8d;
+		background: #ecf0f1;
+		padding: 2px 6px;
+		border-radius: 3px;
+		z-index: 1000;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+
+	&:hover::before {
+		opacity: 1;
+	}
+}
+
+:global([data-testid*='stat-card']) {
+	position: relative;
+
+	&::after {
+		content: attr(data-stat-type);
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		font-size: 9px;
+		color: #95a5a6;
+		background: rgba(236, 240, 241, 0.9);
+		padding: 2px 4px;
+		border-radius: 2px;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		z-index: 100;
+	}
+
+	&:hover::after {
+		opacity: 1;
+	}
+}
+
+:global([data-testid='chart-placeholder']) {
+	position: relative;
+
+	&::after {
+		content: 'ChartArea';
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		font-size: 10px;
+		color: #95a5a6;
+		background: rgba(236, 240, 241, 0.9);
+		padding: 4px 8px;
+		border-radius: 4px;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		z-index: 100;
+	}
+
+	&:hover::after {
+		opacity: 1;
+	}
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+	.analyticsPage {
+		padding: 1rem;
+	}
+
+	.pageTitle {
+		font-size: 2rem;
+	}
+
+	.statsGrid {
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 1rem;
+	}
+
+	.statCard {
+		padding: 1.5rem;
+	}
+
+	.statValue {
+		font-size: 1.5rem;
+	}
+
+	.chartPlaceholder {
+		height: 250px;
+		font-size: 3rem;
+	}
+
+	.comingSoonSection {
+		padding: 1.5rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.statsGrid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.statCard {
+		padding: 1rem;
+	}
+
+	.statIcon {
+		font-size: 1.5rem;
+	}
+
+	.statValue {
+		font-size: 1.2rem;
+	}
+
+	.chartPlaceholder {
+		height: 200px;
+		font-size: 2rem;
+	}
+}

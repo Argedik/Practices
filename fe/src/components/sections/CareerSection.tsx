@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { InlineEditor } from '../ui/InlineEditor';
 import { CareerData } from '../../types/content';
+import styles from './CareerSection.module.scss';
 
 interface CareerSectionProps {
 	data?: CareerData[];
@@ -96,172 +97,45 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 		onUpdate(updated);
 	};
 
-	const sectionStyle: React.CSSProperties = {
-		padding: '2rem',
-		backgroundColor: '#2d3748',
-		borderRadius: '12px',
-		margin: '1rem 0',
-		boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
-		border: '1px solid #4a5568',
-	};
-
-	const timelineStyle: React.CSSProperties = {
-		position: 'relative',
-		paddingLeft: '2rem',
-	};
-
-	const timelineLineStyle: React.CSSProperties = {
-		position: 'absolute',
-		left: '1rem',
-		top: '0',
-		bottom: '0',
-		width: '2px',
-		background: 'linear-gradient(180deg, #667eea 0%, #764ba2 100%)',
-		borderRadius: '1px',
-	};
-
-	const careerItemStyle: React.CSSProperties = {
-		position: 'relative',
-		marginBottom: '2rem',
-		padding: '1.5rem',
-		backgroundColor: '#1a202c',
-		borderRadius: '12px',
-		border: '1px solid #4a5568',
-		marginLeft: '1rem',
-	};
-
-	const timelineDotStyle: React.CSSProperties = {
-		position: 'absolute',
-		left: '-1.5rem',
-		top: '1.5rem',
-		width: '12px',
-		height: '12px',
-		backgroundColor: '#667eea',
-		borderRadius: '50%',
-		border: '3px solid white',
-		boxShadow: '0 0 0 2px #667eea',
-	};
-
-	const companyHeaderStyle: React.CSSProperties = {
-		display: 'flex',
-		alignItems: 'center',
-		gap: '1rem',
-		marginBottom: '1rem',
-	};
-
-	const logoStyle: React.CSSProperties = {
-		width: '60px',
-		height: '60px',
-		borderRadius: '8px',
-		objectFit: 'cover',
-		border: '2px solid #e9ecef',
-	};
-
-	const companyInfoStyle: React.CSSProperties = {
-		flex: 1,
-	};
-
-	const metaInfoStyle: React.CSSProperties = {
-		display: 'flex',
-		gap: '1rem',
-		flexWrap: 'wrap',
-		marginBottom: '1rem',
-		fontSize: '0.9rem',
-		color: '#666',
-	};
-
-	const tagStyle: React.CSSProperties = {
-		display: 'inline-flex',
-		alignItems: 'center',
-		gap: '0.25rem',
-		padding: '0.25rem 0.75rem',
-		backgroundColor: '#e9ecef',
-		borderRadius: '15px',
-		fontSize: '0.8rem',
-		fontWeight: '500',
-	};
+	// CSS Module stilleri kullanılıyor
 
 	return (
-		<div style={sectionStyle}>
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					marginBottom: '2rem',
-				}}
-			>
-				<h3 style={{ margin: 0, color: '#e2e8f0', fontSize: '1.8rem' }}>
-					💼 Kariyer Geçmişi
-				</h3>
-				<button
-					onClick={addCareerItem}
-					style={{
-						backgroundColor: '#28a745',
-						color: 'white',
-						border: 'none',
-						borderRadius: '20px',
-						padding: '8px 16px',
-						cursor: 'pointer',
-						fontSize: '14px',
-						display: 'flex',
-						alignItems: 'center',
-						gap: '0.5rem',
-					}}
-				>
+		<div className={styles.section}>
+			<div className={styles.header}>
+				<h3 className={styles.title}>💼 Kariyer Geçmişi</h3>
+				<button onClick={addCareerItem} className={styles.addButton}>
 					➕ Deneyim Ekle
 				</button>
 			</div>
 
 			{careerData.length === 0 ? (
-				<div
-					style={{
-						textAlign: 'center',
-						padding: '3rem',
-						color: '#666',
-						border: '2px dashed #ddd',
-						borderRadius: '12px',
-					}}
-				>
-					<div style={{ fontSize: '3rem', marginBottom: '1rem' }}>💼</div>
-					<p style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
-						Henüz kariyer deneyimi eklenmedi
-					</p>
-					<button
-						onClick={addCareerItem}
-						style={{
-							backgroundColor: '#007bff',
-							color: 'white',
-							border: 'none',
-							borderRadius: '20px',
-							padding: '12px 24px',
-							cursor: 'pointer',
-							fontSize: '16px',
-						}}
-					>
+				<div className={styles.emptyState}>
+					<div className={styles.emptyIcon}>💼</div>
+					<p className={styles.emptyText}>Henüz kariyer deneyimi eklenmedi</p>
+					<button onClick={addCareerItem} className={styles.emptyButton}>
 						İlk Deneyiminizi Ekleyin
 					</button>
 				</div>
 			) : (
-				<div style={timelineStyle}>
-					<div style={timelineLineStyle}></div>
+				<div className={styles.timeline}>
+					<div className={styles.timelineLine}></div>
 					{careerData.map((item) => (
-						<div key={item.id} style={careerItemStyle}>
-							<div style={timelineDotStyle}></div>
+						<div key={item.id} className={styles.careerItem}>
+							<div className={styles.timelineDot}></div>
 
 							{/* Şirket Header */}
-							<div style={companyHeaderStyle}>
+							<div className={styles.companyHeader}>
 								<img
 									src={item.logoUrl}
 									alt={`${item.company} Logo`}
-									style={logoStyle}
+									className={styles.logo}
 									onError={(e) => {
 										e.currentTarget.src =
 											'https://via.placeholder.com/60x60/6B7280/FFFFFF?text=' +
 											item.company.charAt(0);
 									}}
 								/>
-								<div style={companyInfoStyle}>
+								<div className={styles.companyInfo}>
 									<InlineEditor
 										initialValue={item.company}
 										onSave={(value) =>
@@ -312,8 +186,8 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 							</div>
 
 							{/* Meta Bilgiler */}
-							<div style={metaInfoStyle}>
-								<div style={tagStyle}>
+							<div className={styles.metaInfo}>
+								<div className={styles.tag}>
 									📅
 									<InlineEditor
 										initialValue={item.startDate}
@@ -336,7 +210,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 									</InlineEditor>
 								</div>
 
-								<div style={tagStyle}>
+								<div className={styles.tag}>
 									📍
 									<InlineEditor
 										initialValue={item.location}
@@ -349,7 +223,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 									</InlineEditor>
 								</div>
 
-								<div style={tagStyle}>
+								<div className={styles.tag}>
 									⚡
 									<InlineEditor
 										initialValue={item.workType}
@@ -392,16 +266,8 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 			)}
 
 			{/* Bilgilendirme */}
-			<div
-				style={{
-					marginTop: '2rem',
-					padding: '1rem',
-					backgroundColor: '#e3f2fd',
-					borderRadius: '8px',
-					border: '1px solid #90caf9',
-				}}
-			>
-				<div style={{ fontSize: '0.9rem', color: '#1976d2' }}>
+			<div className={styles.infoBox}>
+				<div className={styles.infoText}>
 					💡 <strong>İpucu:</strong> Tüm alanları tıklayarak
 					düzenleyebilirsiniz. Logo URL&apos;sini değiştirmek için tarayıcı
 					geliştirici araçlarını kullanabilirsiniz.

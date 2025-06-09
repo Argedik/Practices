@@ -19,10 +19,23 @@ export const ContentManagementLayout: React.FC<
 	ContentManagementLayoutProps
 > = () => {
 	return (
-		<div className={styles.contentManagement}>
-			<div className={styles.gridContainer}>
-				{/* Bölüm 1: Hero Section */}
-				<div className={`${styles.section} ${styles.section1}`}>
+		<div
+			className={styles.contentManagement}
+			data-component="ContentManagementLayout"
+			data-testid="content-management-layout"
+		>
+			<div
+				className={styles.gridContainer}
+				data-component="ContentGrid"
+				data-testid="content-grid-container"
+			>
+				{/* Hero Content Management Section */}
+				<div
+					className={`${styles.section} ${styles.heroContentSection}`}
+					data-component="HeroContentSection"
+					data-testid="hero-content-section"
+					data-content-type="hero"
+				>
 					<div className={styles.sectionHeader}>
 						<h3>🎯 Hero Bölümü</h3>
 					</div>
@@ -30,41 +43,78 @@ export const ContentManagementLayout: React.FC<
 					<small>Başlık, metin, resim, pozisyon, alan seçimi</small>
 				</div>
 
-				{/* Bölüm 2: Skills */}
-				<div className={`${styles.section} ${styles.section2}`}>
+				{/* Skills Content Management Section */}
+				<div
+					className={`${styles.section} ${styles.skillsContentSection}`}
+					data-component="SkillsContentSection"
+					data-testid="skills-content-section"
+					data-content-type="skills"
+				>
 					<div className={styles.sectionHeader}>
 						<h3>💪 Yetenekler</h3>
-						<button className={styles.addButton}>➕ Yetenek Ekle</button>
+						<button className={styles.addButton} data-testid="add-skill-button">
+							➕ Yetenek Ekle
+						</button>
 					</div>
 					<p>Dinamik yetenek listesi burada olacak</p>
 					<small>Yetenek adı + yetkinlik slider</small>
 				</div>
 
-				{/* Bölüm 3: Career */}
-				<div className={`${styles.section} ${styles.section3}`}>
-					<div className={styles.sectionHeader}>
-						<h3>💼 Kariyer</h3>
-						<button className={styles.addButton}>➕ Kariyer Ekle</button>
-					</div>
-					<p>Kariyer deneyimleri burada olacak</p>
-					<small>Departman, tarih aralığı, açıklama, logo</small>
-				</div>
-
-				{/* Bölüm 4: Projects */}
-				<div className={`${styles.section} ${styles.section4}`}>
+				{/* Projects Content Management Section */}
+				<div
+					className={`${styles.section} ${styles.projectsContentSection}`}
+					data-component="ProjectsContentSection"
+					data-testid="projects-content-section"
+					data-content-type="projects"
+				>
 					<div className={styles.sectionHeader}>
 						<h3>🚀 Projeler</h3>
-						<button className={styles.addButton}>➕ Proje Ekle</button>
+						<button
+							className={styles.addButton}
+							data-testid="add-project-button"
+						>
+							➕ Proje Ekle
+						</button>
 					</div>
 					<p>Proje portföyü burada olacak</p>
 					<small>Proje adı, tarih aralığı, açıklama, logo</small>
 				</div>
 
-				{/* Bölüm 5: Contact & Social Media */}
-				<div className={`${styles.section} ${styles.section5}`}>
+				{/* Career Content Management Section */}
+				<div
+					className={`${styles.section} ${styles.careerContentSection}`}
+					data-component="CareerContentSection"
+					data-testid="career-content-section"
+					data-content-type="career"
+				>
+					<div className={styles.sectionHeader}>
+						<h3>💼 Kariyer</h3>
+						<button
+							className={styles.addButton}
+							data-testid="add-career-button"
+						>
+							➕ Kariyer Ekle
+						</button>
+					</div>
+					<p>Kariyer deneyimleri burada olacak</p>
+					<small>Departman, tarih aralığı, açıklama, logo</small>
+				</div>
+
+				{/* Contact Content Management Section */}
+				<div
+					className={`${styles.section} ${styles.contactContentSection}`}
+					data-component="ContactContentSection"
+					data-testid="contact-content-section"
+					data-content-type="contact"
+				>
 					<div className={styles.sectionHeader}>
 						<h3>📞 İletişim & Sosyal Medya</h3>
-						<button className={styles.addButton}>➕ Sosyal Medya Ekle</button>
+						<button
+							className={styles.addButton}
+							data-testid="add-contact-button"
+						>
+							➕ Sosyal Medya Ekle
+						</button>
 					</div>
 					<p>İletişim ve sosyal medya burada olacak</p>
 					<small>10 sosyal medya + iletişim formu + toggle&apos;lar</small>

@@ -1,3 +1,9 @@
+// ================================
+// MERKEZI TEMA SİSTEMİ İMPORT
+// ================================
+@import '../styles/theme.scss';
+@import '../styles/components.scss';
+
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -8,18 +14,16 @@ html,
 body {
 	max-width: 100vw;
 	overflow-x: hidden;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-		sans-serif;
+	font-family: var(--font-primary);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: #0f172a;
-	color: #f1f5f9;
+	background-color: var(--bg-primary);
+	color: var(--text-primary);
 }
 
 body {
-	color: #f1f5f9;
-	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+	color: var(--text-primary);
+	background: var(--gradient-dark);
 }
 
 a {
@@ -46,189 +50,57 @@ textarea {
 	padding: 20px;
 }
 
-.btn {
-	padding: 10px 20px;
-	border-radius: 5px;
-	font-weight: 500;
-	transition: all 0.3s ease;
-
-	&.primary {
-		background-color: #007bff;
-		color: white;
-
-		&:hover {
-			background-color: #0056b3;
-		}
-	}
-
-	&.danger {
-		background-color: #dc3545;
-		color: white;
-
-		&:hover {
-			background-color: #c82333;
-		}
-	}
-
-	&.success {
-		background-color: #28a745;
-		color: white;
-
-		&:hover {
-			background-color: #218838;
-		}
-	}
-
-	&.secondary {
-		background-color: #6c757d;
-		color: white;
-
-		&:hover {
-			background-color: #5a6268;
-		}
-	}
+// Buton stilleri artık components.scss'te tanımlı
+// Geriye dönük uyumluluk için eski class isimleri
+.btn.primary {
+	@extend .btn--primary;
+}
+.btn.danger {
+	@extend .btn--danger;
+}
+.btn.success {
+	@extend .btn--success;
+}
+.btn.secondary {
+	@extend .btn--secondary;
 }
 
-.form-group {
-	margin-bottom: 15px;
+// Form stilleri artık components.scss'te tanımlı
+// Bu kısım artık gereksiz, components.scss'teki .form-group kullanılacak
 
-	label {
-		display: block;
-		margin-bottom: 5px;
-		font-weight: 500;
-		color: #cbd5e1;
-	}
+// Tablo stilleri artık components.scss'te tanımlı
 
-	input {
-		width: 100%;
-		padding: 10px;
-		border: 1px solid #4a5568;
-		border-radius: 5px;
-		font-size: 14px;
-		background-color: #1a202c;
-		color: #e2e8f0;
-
-		&:focus {
-			border-color: #007bff;
-			box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-		}
-	}
+// Modal stilleri artık components.scss'te tanımlı
+// Geriye dönük uyumluluk için eski class isimleri
+.modal-content {
+	@extend .modal__content;
+}
+.modal-header {
+	@extend .modal__header;
 }
 
-.table {
-	width: 100%;
-	border-collapse: collapse;
-	background-color: #2d3748;
-	border-radius: 8px;
-	overflow: hidden;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-
-	th,
-	td {
-		padding: 12px;
-		text-align: left;
-		border-bottom: 1px solid #4a5568;
-		color: #e2e8f0;
-	}
-
-	th {
-		background-color: #1a202c;
-		font-weight: 600;
-		color: #f1f5f9;
-	}
-
-	tr:hover {
-		background-color: #1a202c;
-	}
+// Alert stilleri artık components.scss'te tanımlı
+// Geriye dönük uyumluluk için eski class isimleri
+.alert.success {
+	@extend .alert--success;
+}
+.alert.error {
+	@extend .alert--danger;
 }
 
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-
-	.modal-content {
-		background-color: #2d3748;
-		padding: 30px;
-		border-radius: 10px;
-		width: 90%;
-		max-width: 500px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-		border: 1px solid #4a5568;
-	}
-
-	.modal-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 20px;
-
-		h2 {
-			margin: 0;
-			color: #e2e8f0;
-		}
-
-		.close-btn {
-			background: none;
-			border: none;
-			font-size: 24px;
-			cursor: pointer;
-			color: #a0aec0;
-
-			&:hover {
-				color: #e2e8f0;
-			}
-		}
-	}
-}
-
-.alert {
-	padding: 12px 16px;
-	border-radius: 5px;
-	margin-bottom: 20px;
-
-	&.success {
-		background-color: #1a202c;
-		color: #68d391;
-		border: 1px solid #38a169;
-	}
-
-	&.error {
-		background-color: #1a202c;
-		color: #fc8181;
-		border: 1px solid #e53e3e;
-	}
-}
-
+// Loading stilleri artık components.scss'te tanımlı
+// Geriye dönük uyumluluk için loading container
 .loading {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 40px;
+	padding: var(--spacing-4xl);
 
 	.spinner {
+		@extend .loading;
+		padding: 0;
 		width: 40px;
 		height: 40px;
-		border: 4px solid #4a5568;
-		border-top: 4px solid #007bff;
-		border-radius: 50%;
-		animation: spin 1s linear infinite;
-	}
-}
-
-@keyframes spin {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
 	}
 }
 
@@ -422,5 +294,23 @@ textarea {
 	100% {
 		transform: translateY(-80px) scale(0) rotate(360deg);
 		opacity: 0;
+	}
+}
+
+// Gallery Page Specific Overrides
+.gallery-page-wrapper {
+	// Layout'taki main container'ın padding'ini sıfırla
+	main > div {
+		padding: 0 !important;
+	}
+
+	// Gallery sayfasının tam sayfa kaplaması için
+	[data-component='GalleryPage'] {
+		min-height: 100vh;
+		width: 100vw;
+		margin: 0;
+		position: relative;
+		left: 0;
+		right: 0;
 	}
 }

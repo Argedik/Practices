@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import styles from './InlineEditor.module.scss';
 
 interface InlineEditorProps {
 	initialValue: string;
@@ -60,7 +61,7 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 
 	if (isEditing) {
 		return (
-			<div style={{ position: 'relative', ...style }} className={className}>
+			<div className={`${styles.editMode} ${className}`} style={style}>
 				{type === 'textarea' ? (
 					<textarea
 						ref={inputRef as React.RefObject<HTMLTextAreaElement>}
@@ -68,17 +69,7 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 						onChange={(e) => setValue(e.target.value)}
 						onKeyDown={handleKeyDown}
 						onBlur={handleSave}
-						style={{
-							width: '100%',
-							minHeight: '100px',
-							border: '2px solid #007bff',
-							borderRadius: '4px',
-							padding: '8px',
-							fontSize: 'inherit',
-							fontFamily: 'inherit',
-							backgroundColor: '#1a202c',
-							color: '#e2e8f0',
-						}}
+						className={styles.textarea}
 					/>
 				) : type === 'image' ? (
 					<div>
@@ -89,29 +80,10 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 							onKeyDown={handleKeyDown}
 							onBlur={handleSave}
 							placeholder="Görsel URL'si girin..."
-							style={{
-								width: '100%',
-								border: '2px solid #007bff',
-								borderRadius: '4px',
-								padding: '8px',
-								fontSize: 'inherit',
-								fontFamily: 'inherit',
-								backgroundColor: '#1a202c',
-								color: '#e2e8f0',
-							}}
+							className={styles.imageInput}
 						/>
 						{value && (
-							<img
-								src={value}
-								alt="Preview"
-								style={{
-									maxWidth: '200px',
-									maxHeight: '200px',
-									marginTop: '8px',
-									border: '1px solid #ddd',
-									borderRadius: '4px',
-								}}
-							/>
+							<img src={value} alt="Preview" className={styles.imagePreview} />
 						)}
 					</div>
 				) : (
@@ -121,55 +93,20 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 						onChange={(e) => setValue(e.target.value)}
 						onKeyDown={handleKeyDown}
 						onBlur={handleSave}
-						style={{
-							width: '100%',
-							border: '2px solid #007bff',
-							borderRadius: '4px',
-							padding: '8px',
-							fontSize: 'inherit',
-							fontFamily: 'inherit',
-							backgroundColor: '#1a202c',
-							color: '#e2e8f0',
-						}}
+						className={styles.textInput}
 					/>
 				)}
-				<div
-					style={{
-						position: 'absolute',
-						top: '-10px',
-						right: '-10px',
-						display: 'flex',
-						gap: '4px',
-					}}
-				>
+				<div className={styles.actionButtons}>
 					<button
 						onClick={handleSave}
-						style={{
-							backgroundColor: '#28a745',
-							color: 'white',
-							border: 'none',
-							borderRadius: '50%',
-							width: '24px',
-							height: '24px',
-							cursor: 'pointer',
-							fontSize: '12px',
-						}}
+						className={styles.saveButton}
 						title="Kaydet"
 					>
 						✓
 					</button>
 					<button
 						onClick={handleCancel}
-						style={{
-							backgroundColor: '#6c757d',
-							color: 'white',
-							border: 'none',
-							borderRadius: '50%',
-							width: '24px',
-							height: '24px',
-							cursor: 'pointer',
-							fontSize: '12px',
-						}}
+						className={styles.cancelButton}
 						title="İptal"
 					>
 						✕
@@ -181,33 +118,17 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 
 	return (
 		<div
-			style={{
-				position: 'relative',
-				cursor: 'pointer',
-				...style,
-			}}
-			className={className}
+			className={`${styles.container} ${className}`}
+			style={style}
 			onClick={() => setIsEditing(true)}
 			onMouseEnter={() => setShowDeleteButton(true)}
 			onMouseLeave={() => setShowDeleteButton(false)}
 		>
 			{type === 'image' ? (
 				value ? (
-					<img
-						src={value}
-						alt="Content"
-						style={{ maxWidth: '100%', height: 'auto' }}
-					/>
+					<img src={value} alt="Content" className={styles.image} />
 				) : (
-					<div
-						style={{
-							border: '2px dashed #4a5568',
-							padding: '2rem',
-							textAlign: 'center',
-							color: '#a0aec0',
-							backgroundColor: '#1a202c',
-						}}
-					>
+					<div className={styles.imagePlaceholder}>
 						Görsel eklemek için tıklayın
 					</div>
 				)
@@ -217,29 +138,16 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 
 			{/* Düzenleme ve Silme butonları */}
 			<div
-				style={{
-					position: 'absolute',
-					top: '8px',
-					right: '8px',
-					display: showDeleteButton ? 'flex' : 'none',
-					gap: '4px',
-				}}
+				className={
+					showDeleteButton ? styles.hoverButtons : styles.hoverButtonsHidden
+				}
 			>
 				<button
 					onClick={(e) => {
 						e.stopPropagation();
 						setIsEditing(true);
 					}}
-					style={{
-						backgroundColor: '#007bff',
-						color: 'white',
-						border: 'none',
-						borderRadius: '50%',
-						width: '28px',
-						height: '28px',
-						cursor: 'pointer',
-						fontSize: '14px',
-					}}
+					className={styles.editButton}
 					title="Düzenle"
 				>
 					✏️
@@ -250,16 +158,7 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 							e.stopPropagation();
 							handleDelete();
 						}}
-						style={{
-							backgroundColor: '#dc3545',
-							color: 'white',
-							border: 'none',
-							borderRadius: '50%',
-							width: '28px',
-							height: '28px',
-							cursor: 'pointer',
-							fontSize: '14px',
-						}}
+						className={styles.deleteButton}
 						title="Sil"
 					>
 						🗑️

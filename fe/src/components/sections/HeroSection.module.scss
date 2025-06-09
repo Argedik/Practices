@@ -1,0 +1,169 @@
+.section {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	padding: 2rem;
+	min-height: 400px;
+	background-color: #2d3748;
+	border-radius: 12px;
+	margin: 1rem 0;
+	position: relative;
+	border: 1px solid #4a5568;
+}
+
+.sectionReverse {
+	flex-direction: row-reverse;
+}
+
+.sectionNormal {
+	flex-direction: row;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+.title {
+	margin: 0;
+	color: #e2e8f0;
+	font-size: 1.8rem;
+}
+
+.addButton {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.heroContent {
+	text-align: center;
+}
+
+.heroTitle {
+	font-size: 3rem;
+	font-weight: bold;
+	color: #e2e8f0;
+	margin-bottom: 1rem;
+}
+
+.heroDescription {
+	font-size: 1.2rem;
+	color: #cbd5e1;
+	margin-bottom: 2rem;
+	line-height: 1.6;
+}
+
+.emptyState {
+	text-align: center;
+	padding: 3rem;
+	color: #a0aec0;
+	border: 2px dashed #4a5568;
+	border-radius: 12px;
+	background-color: #1a202c;
+}
+
+.emptyIcon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.emptyText {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+.emptyButton {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 12px 24px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.tip {
+	margin-top: 2rem;
+	padding: 1rem;
+	background-color: #e3f2fd;
+	border-radius: 8px;
+	border: 1px solid #90caf9;
+}
+
+.tipText {
+	font-size: 0.9rem;
+	color: #1976d2;
+}
+
+.textContent {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.imageContent {
+	flex: 1;
+	max-width: 400px;
+}
+
+.imageEditor {
+	width: 100%;
+	height: 300px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.titleEditor {
+	font-size: 2.5rem;
+	font-weight: bold;
+	color: #e2e8f0;
+	line-height: 1.2;
+	margin-bottom: 0.5rem;
+}
+
+.textEditor {
+	font-size: 1.1rem;
+	color: #cbd5e1;
+	line-height: 1.6;
+}
+
+.title {
+	font-size: 2.5rem;
+	font-weight: bold;
+	color: #e2e8f0;
+	line-height: 1.2;
+	margin: 0;
+}
+
+.text {
+	font-size: 1.1rem;
+	color: #cbd5e0;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.positionButton {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 14px;
+	z-index: 1;
+}

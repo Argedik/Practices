@@ -1,0 +1,128 @@
+.container {
+	position: relative;
+	cursor: pointer;
+}
+
+.editMode {
+	position: relative;
+	z-index: 100;
+}
+
+.textarea {
+	width: 100%;
+	min-height: 100px;
+	border: 2px solid #007bff;
+	border-radius: 4px;
+	padding: 8px;
+	font-size: inherit;
+	font-family: inherit;
+	background-color: #1a202c;
+	color: #e2e8f0;
+}
+
+.imageInput {
+	width: 100%;
+	border: 2px solid #007bff;
+	border-radius: 4px;
+	padding: 8px;
+	font-size: inherit;
+	font-family: inherit;
+	background-color: #1a202c;
+	color: #e2e8f0;
+}
+
+.imagePreview {
+	max-width: 200px;
+	max-height: 200px;
+	margin-top: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.textInput {
+	width: 100%;
+	border: 2px solid #007bff;
+	border-radius: 4px;
+	padding: 8px;
+	font-size: inherit;
+	font-family: inherit;
+	background-color: #1a202c;
+	color: #e2e8f0;
+}
+
+.actionButtons {
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	display: flex;
+	gap: 4px;
+}
+
+.saveButton {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.cancelButton {
+	background-color: #6c757d;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.hoverButtons {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	display: flex;
+	gap: 4px;
+}
+
+.hoverButtonsHidden {
+	display: none;
+}
+
+.editButton {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.deleteButton {
+	background-color: #dc3545;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.imagePlaceholder {
+	border: 2px dashed #4a5568;
+	padding: 2rem;
+	text-align: center;
+	color: #a0aec0;
+	background-color: #1a202c;
+}
+
+.image {
+	max-width: 100%;
+	height: auto;
+}

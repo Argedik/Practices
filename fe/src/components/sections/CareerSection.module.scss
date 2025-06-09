@@ -1,0 +1,169 @@
+.section {
+	margin-bottom: 2rem;
+	padding: 2rem;
+	background: rgba(255, 255, 255, 0.05);
+	border-radius: 16px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+.title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #f1f5f9;
+	margin: 0;
+}
+
+.addButton {
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	transition: all 0.2s ease;
+
+	&:hover {
+		background-color: #218838;
+		transform: translateY(-2px);
+	}
+}
+
+.timeline {
+	position: relative;
+	padding-left: 2rem;
+}
+
+.timelineLine {
+	position: absolute;
+	left: 1rem;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+	border-radius: 1px;
+}
+
+.careerItem {
+	position: relative;
+	margin-bottom: 2rem;
+	padding: 1.5rem;
+	background-color: #1a202c;
+	border-radius: 12px;
+	border: 1px solid #4a5568;
+	margin-left: 1rem;
+	transition: all 0.2s ease;
+
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+	}
+}
+
+.timelineDot {
+	position: absolute;
+	left: -1.5rem;
+	top: 1.5rem;
+	width: 12px;
+	height: 12px;
+	background-color: #667eea;
+	border-radius: 50%;
+	border: 3px solid white;
+	box-shadow: 0 0 0 2px #667eea;
+}
+
+.companyHeader {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.logo {
+	width: 60px;
+	height: 60px;
+	border-radius: 8px;
+	object-fit: cover;
+	border: 2px solid #e9ecef;
+}
+
+.companyInfo {
+	flex: 1;
+}
+
+.metaInfo {
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 1rem;
+	font-size: 0.9rem;
+	color: #666;
+}
+
+.tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	padding: 0.25rem 0.75rem;
+	background-color: #e9ecef;
+	border-radius: 15px;
+	font-size: 0.8rem;
+	font-weight: 500;
+}
+
+.emptyState {
+	text-align: center;
+	padding: 3rem;
+	color: #666;
+	border: 2px dashed #ddd;
+	border-radius: 12px;
+}
+
+.emptyIcon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.emptyText {
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+.emptyButton {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	padding: 12px 24px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: all 0.2s ease;
+
+	&:hover {
+		background-color: #0056b3;
+		transform: translateY(-2px);
+	}
+}
+
+.infoBox {
+	margin-top: 2rem;
+	padding: 1rem;
+	background-color: #e3f2fd;
+	border-radius: 8px;
+	border: 1px solid #90caf9;
+}
+
+.infoText {
+	font-size: 0.9rem;
+	color: #1976d2;
+}
