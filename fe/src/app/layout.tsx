@@ -1,7 +1,7 @@
 'use client';
 
 import './globals.scss';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../store';
 import { Sidebar } from '../components/navigation/Sidebar';
@@ -13,6 +13,11 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
 	const [sidebarVisible, setSidebarVisible] = useState(true);
+	const [isClient, setIsClient] = useState(false);
+
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
 
 	const handleToggleSidebar = () => {
 		setSidebarVisible(!sidebarVisible);
@@ -31,6 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
 	const contentStyle: React.CSSProperties = {
 		width: '100%',
+		...(isClient && { padding: '0' }), // Sadece client-side'da padding'i kaldır
 	};
 
 	return (
@@ -55,7 +61,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
 					{/* Main Content */}
 					<main style={mainStyle}>
-						<div style={contentStyle}>{children}</div>
+						<div style={contentStyle} suppressHydrationWarning={true}>
+							{children}
+						</div>
 					</main>
 				</Provider>
 			</body>
