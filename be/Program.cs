@@ -11,6 +11,9 @@ builder.Services.AddSwaggerGen();
 // Content Service'i ekle
 builder.Services.AddScoped<ContentService>();
 
+// Portfolio Service'i ekle
+builder.Services.AddScoped<PortfolioDataService>();
+
 // CORS ayarları - Frontend ile iletişim için
 builder.Services.AddCors(options =>
 {

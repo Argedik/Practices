@@ -1,19 +1,19 @@
 {
   "personal": {
     "fullName": "John Doe",
-    "title": "Full Stack Developer",
+    "title": "Frontend Developer",
     "profileImage": "/images/profile.jpg",
     "cvDownloadLink": "",
-    "welcomeMessage": "Merhaba! Ben bir yaz\u0131l\u0131m geli\u015Ftiricisiyim."
+    "welcomeMessage": "Full Stack Developer ve UI/UX tasar\u0131mc\u0131s\u0131y\u0131m. Modern web teknolojileri ile kullan\u0131c\u0131 dostu \u00E7\u00F6z\u00FCmler geli\u015Ftiriyorum."
   },
   "about": {
-    "description": "5\u002B y\u0131ll\u0131k deneyime sahip passionate bir yaz\u0131l\u0131m geli\u015Ftiricisiyim.",
+    "description": "Full Stack Developer ve UI/UX tasar\u0131mc\u0131s\u0131y\u0131m. Modern web teknolojileri ile kullan\u0131c\u0131 dostu \u00E7\u00F6z\u00FCmler geli\u015Ftiriyorum.",
     "skills": [
-      "C#",
-      "JavaScript",
-      "React",
-      "Node.js",
-      "SQL"
+      "React22",
+      "Node.js2",
+      "TypeScript2",
+      "MongoDB",
+      "Test Skill"
     ],
     "yearsExperience": 5,
     "projectsCompleted": 25

@@ -1,0 +1,9 @@
+{
+  "id": "hero-1",
+  "title": "Merhaba, Ben John Doe",
+  "text": "Full Stack Developer ve UI/UX tasar\u0131mc\u0131s\u0131y\u0131m. Modern web teknolojileri ile kullan\u0131c\u0131 dostu \u00E7\u00F6z\u00FCmler geli\u015Ftiriyorum.",
+  "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400\u0026h=400\u0026fit=crop\u0026crop=face",
+  "position": "right",
+  "areaNumber": 1,
+  "lastUpdated": "2025-06-12T11:00:51.283074+03:00"
+}

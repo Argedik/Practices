@@ -1,0 +1,37 @@
+[
+  {
+    "id": "skill-1",
+    "name": "React2223",
+    "proficiency": 90,
+    "category": "General",
+    "lastUpdated": "2025-06-11T23:11:00.78531+03:00"
+  },
+  {
+    "id": "skill-2",
+    "name": "Node.js2",
+    "proficiency": 85,
+    "category": "General",
+    "lastUpdated": "2025-06-11T23:11:00.78531+03:00"
+  },
+  {
+    "id": "skill-3",
+    "name": "TypeScript2",
+    "proficiency": 88,
+    "category": "General",
+    "lastUpdated": "2025-06-11T23:11:00.78531+03:00"
+  },
+  {
+    "id": "skill-4",
+    "name": "MongoDB",
+    "proficiency": 80,
+    "category": "General",
+    "lastUpdated": "2025-06-11T23:11:00.785311+03:00"
+  },
+  {
+    "id": "skill-1749669062871",
+    "name": "Test Skill",
+    "proficiency": 33,
+    "category": "General",
+    "lastUpdated": "2025-06-11T23:11:00.785311+03:00"
+  }
+]
