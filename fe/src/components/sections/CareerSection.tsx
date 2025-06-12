@@ -27,7 +27,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 						endDate: 'Devam Ediyor',
 						description:
 							'React, TypeScript ve Next.js kullanarak modern web uygulamaları geliştiriyorum. Takım liderliği ve kod review süreçlerinde aktif rol alıyorum.',
-						logoUrl: 'https://via.placeholder.com/60x60/4F46E5/FFFFFF?text=TC',
+						logoUrl: 'https://picsum.photos/60/60?random=1',
 						location: 'İstanbul',
 						workType: 'Tam Zamanlı',
 						lastUpdated: '2024-12-20T10:00:00Z',
@@ -40,7 +40,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 						endDate: 'Aralık 2021',
 						description:
 							'E-ticaret platformları ve kurumsal web siteleri geliştirdim. Node.js, MongoDB ve React teknolojilerinde uzmanlaştım.',
-						logoUrl: 'https://via.placeholder.com/60x60/10B981/FFFFFF?text=DW',
+						logoUrl: 'https://picsum.photos/60/60?random=2',
 						location: 'Ankara',
 						workType: 'Tam Zamanlı',
 						lastUpdated: '2024-12-20T10:00:00Z',
@@ -53,7 +53,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 						endDate: 'Mayıs 2020',
 						description:
 							'Çeşitli küçük ve orta ölçekli işletmeler için web siteleri ve mobil uygulamalar geliştirdim.',
-						logoUrl: 'https://via.placeholder.com/60x60/F59E0B/FFFFFF?text=FL',
+						logoUrl: 'https://picsum.photos/60/60?random=3',
 						location: 'Uzaktan',
 						workType: 'Freelance',
 						lastUpdated: '2024-12-20T10:00:00Z',
@@ -69,7 +69,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 			startDate: 'Başlangıç Tarihi',
 			endDate: 'Bitiş Tarihi',
 			description: 'İş tanımınızı buraya yazın...',
-			logoUrl: 'https://via.placeholder.com/60x60/6B7280/FFFFFF?text=YS',
+			logoUrl: 'https://picsum.photos/60/60?random=4',
 			location: 'Şehir',
 			workType: 'Tam Zamanlı',
 			lastUpdated: new Date().toISOString(),
@@ -131,7 +131,7 @@ export const CareerSection: React.FC<CareerSectionProps> = ({
 									className={styles.logo}
 									onError={(e) => {
 										e.currentTarget.src =
-											'https://via.placeholder.com/60x60/6B7280/FFFFFF?text=' +
+											'https://picsum.photos/60/60?random=' +
 											item.company.charAt(0);
 									}}
 								/>

@@ -24,7 +24,6 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 }) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [value, setValue] = useState(initialValue);
-	const [showDeleteButton, setShowDeleteButton] = useState(false);
 	const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
 	useEffect(() => {
@@ -68,7 +67,6 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 						value={value}
 						onChange={(e) => setValue(e.target.value)}
 						onKeyDown={handleKeyDown}
-						onBlur={handleSave}
 						className={styles.textarea}
 					/>
 				) : type === 'image' ? (
@@ -78,7 +76,6 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 							value={value}
 							onChange={(e) => setValue(e.target.value)}
 							onKeyDown={handleKeyDown}
-							onBlur={handleSave}
 							placeholder="Görsel URL'si girin..."
 							className={styles.imageInput}
 						/>
@@ -92,37 +89,47 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 						value={value}
 						onChange={(e) => setValue(e.target.value)}
 						onKeyDown={handleKeyDown}
-						onBlur={handleSave}
 						className={styles.textInput}
 					/>
 				)}
+
+				{/* Edit modunda butonlar */}
 				<div className={styles.actionButtons}>
 					<button
 						onClick={handleSave}
 						className={styles.saveButton}
 						title="Kaydet"
 					>
-						✓
+						💾
 					</button>
+					{onDelete && (
+						<button
+							onClick={handleDelete}
+							className={styles.deleteButton}
+							title="Sil"
+						>
+							🗑️
+						</button>
+					)}
 					<button
 						onClick={handleCancel}
 						className={styles.cancelButton}
 						title="İptal"
 					>
-						✕
+						❌
 					</button>
 				</div>
 			</div>
 		);
 	}
 
+	// Normal görünüm - sadece tıklayabilir alan
 	return (
 		<div
 			className={`${styles.container} ${className}`}
 			style={style}
 			onClick={() => setIsEditing(true)}
-			onMouseEnter={() => setShowDeleteButton(true)}
-			onMouseLeave={() => setShowDeleteButton(false)}
+			title="Düzenlemek için tıklayın"
 		>
 			{type === 'image' ? (
 				value ? (
@@ -135,36 +142,6 @@ export const InlineEditor: React.FC<InlineEditorProps> = ({
 			) : (
 				children || value || 'Düzenlemek için tıklayın'
 			)}
-
-			{/* Düzenleme ve Silme butonları */}
-			<div
-				className={
-					showDeleteButton ? styles.hoverButtons : styles.hoverButtonsHidden
-				}
-			>
-				<button
-					onClick={(e) => {
-						e.stopPropagation();
-						setIsEditing(true);
-					}}
-					className={styles.editButton}
-					title="Düzenle"
-				>
-					✏️
-				</button>
-				{onDelete && (
-					<button
-						onClick={(e) => {
-							e.stopPropagation();
-							handleDelete();
-						}}
-						className={styles.deleteButton}
-						title="Sil"
-					>
-						🗑️
-					</button>
-				)}
-			</div>
 		</div>
 	);
 };

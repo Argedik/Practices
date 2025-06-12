@@ -1,8 +1,8 @@
 // ================================
 // MERKEZI TEMA SİSTEMİ İMPORT
 // ================================
-@import '../styles/theme.scss';
-@import '../styles/components.scss';
+@use '../styles/theme';
+@use '../styles/components';
 
 * {
 	box-sizing: border-box;
@@ -180,7 +180,7 @@ textarea {
 	0% {
 		transform: translateY(-50%) scale(1) rotate(0deg);
 		opacity: 1;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		background: var(--gradient-blue-purple);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 		filter: brightness(1) saturate(1);
 	}
@@ -195,7 +195,12 @@ textarea {
 	30% {
 		transform: translateY(-50%) scale(1.1) rotate(180deg);
 		opacity: 0.9;
-		background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ec4899 100%);
+		background: linear-gradient(
+			135deg,
+			#fbbf24 0%,
+			var(--success-color-light) 50%,
+			#ec4899 100%
+		);
 		box-shadow: 0 0 40px rgba(251, 191, 36, 1), 0 0 80px rgba(245, 158, 11, 0.8),
 			0 0 120px rgba(236, 72, 153, 0.6);
 		filter: brightness(2) saturate(2);

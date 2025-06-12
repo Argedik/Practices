@@ -19,13 +19,23 @@ public class PersonalInfo
     public string ProfileImage { get; set; } = "";
     public string CvDownloadLink { get; set; } = "";
     public string WelcomeMessage { get; set; } = "";
+    public string Position { get; set; } = "left"; // left, right
+    public int AreaNumber { get; set; } = 1;
+}
+
+// Skill detayları
+public class Skill
+{
+    public string Name { get; set; } = "";
+    public int Proficiency { get; set; } = 75; // 0-100 arası
 }
 
 // Hakkımda bölümü
 public class AboutMe
 {
     public string Description { get; set; } = "";
-    public List<string> Skills { get; set; } = new();
+    public List<string> Skills { get; set; } = new(); // Geriye uyumluluk için
+    public List<Skill> DetailedSkills { get; set; } = new(); // Yeni detaylı skills
     public int YearsExperience { get; set; }
     public int ProjectsCompleted { get; set; }
 }

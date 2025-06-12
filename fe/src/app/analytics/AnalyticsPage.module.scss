@@ -1,6 +1,6 @@
 .analyticsPage {
 	padding: var(--spacing-3xl);
-	background: var(--bg-white);
+	background: var(--bg-glass);
 	box-shadow: var(--shadow-xl);
 	font-family: var(--font-primary);
 }
@@ -96,7 +96,7 @@
 
 .comingSoonSection {
 	padding: 2rem;
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background: var(--gradient-blue-purple);
 	border-radius: 12px;
 	color: white;
 	text-align: center;
