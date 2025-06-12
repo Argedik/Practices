@@ -338,7 +338,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isVisible, onToggle }) => {
 										width: '8px',
 										height: '30px',
 										background:
-											'linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%)',
+											'linear-gradient(180deg, #fbbf24 0%, var(--success-color-light) 100%)',
 										borderRadius: '0 4px 4px 0',
 										transition: 'all 0.2s ease',
 										boxShadow: '2px 0 8px rgba(251, 191, 36, 0.4)',

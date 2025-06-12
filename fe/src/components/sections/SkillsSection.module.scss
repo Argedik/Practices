@@ -1,55 +1,143 @@
 .section {
-	padding: 2rem;
-	background-color: #2d3748;
-	border-radius: 12px;
-	margin: 1rem 0;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-	border: 1px solid #4a5568;
+	padding: var(--spacing-3xl);
+	background-color: var(--bg-secondary);
+	border-radius: var(--radius-xl);
+	margin: var(--spacing-lg) 0;
+	box-shadow: var(--shadow-lg);
+	border: 1px solid var(--border-secondary);
 }
 
 .header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 2rem;
+	margin-bottom: var(--spacing-3xl);
 }
 
 .title {
 	margin: 0;
-	color: #e2e8f0;
-	font-size: 1.8rem;
+	color: var(--text-secondary);
+	font-size: var(--font-3xl);
+	font-weight: var(--font-semibold);
 }
 
 .addButton {
-	background-color: #28a745;
+	background-color: var(--success-color);
 	color: white;
 	border: none;
-	border-radius: 20px;
-	padding: 8px 16px;
+	border-radius: var(--radius-3xl);
+	padding: var(--spacing-sm) var(--spacing-lg);
 	cursor: pointer;
-	font-size: 14px;
+	font-size: var(--font-sm);
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
+	gap: var(--spacing-sm);
+	transition: var(--transition-normal);
+
+	&:hover {
+		background-color: var(--success-color-dark);
+		transform: translateY(-1px);
+		box-shadow: var(--shadow-md);
+	}
 }
 
+.skillItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--spacing-2xl);
+	margin-bottom: var(--spacing-lg);
+	background-color: var(--bg-primary);
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--border-secondary);
+	position: relative;
+	transition: var(--transition-normal);
+
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-lg);
+	}
+}
+
+.skillContent {
+	flex: 1;
+}
+
+.skillName {
+	font-size: var(--font-xl);
+	font-weight: var(--font-bold);
+	color: var(--text-secondary);
+	margin-bottom: var(--spacing-sm);
+}
+
+.skillBar {
+	width: 100%;
+	height: 8px;
+	background-color: var(--border-secondary);
+	border-radius: var(--radius-sm);
+	overflow: hidden;
+	margin: var(--spacing-sm) 0;
+}
+
+.skillProgress {
+	height: 100%;
+	background-color: var(--info-color);
+	border-radius: var(--radius-sm);
+	transition: var(--transition-normal);
+}
+
+.skillProficiency {
+	font-size: var(--font-sm);
+	color: var(--text-muted);
+	display: inline-block;
+}
+
+.skillScore {
+	text-align: center;
+	margin-left: var(--spacing-lg);
+	min-width: 60px;
+}
+
+.scoreValue {
+	font-size: var(--font-3xl);
+	font-weight: var(--font-bold);
+
+	&.high {
+		color: var(--success-color);
+	}
+
+	&.medium {
+		color: var(--warning-color);
+	}
+
+	&.low {
+		color: var(--gray-500);
+	}
+}
+
+.scoreLabel {
+	font-size: var(--font-xs);
+	color: var(--text-muted);
+}
+
+// Eski grid sistemi - geriye dönük uyumluluk için
 .skillsGrid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: 1.5rem;
+	gap: var(--spacing-2xl);
 }
 
 .skillCard {
-	background-color: #1a202c;
-	border-radius: 12px;
-	padding: 1.5rem;
-	border: 1px solid #4a5568;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	background-color: var(--bg-primary);
+	border-radius: var(--radius-xl);
+	padding: var(--spacing-2xl);
+	border: 1px solid var(--border-secondary);
+	transition: var(--transition-normal);
 }
 
 .skillCard:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+	box-shadow: var(--shadow-xl);
 }
 
 .skillName {
@@ -90,31 +178,39 @@
 
 .emptyState {
 	text-align: center;
-	padding: 3rem;
-	color: #a0aec0;
-	border: 2px dashed #4a5568;
-	border-radius: 12px;
-	background-color: #1a202c;
+	padding: var(--spacing-5xl);
+	color: var(--text-muted);
+	border: 2px dashed var(--border-secondary);
+	border-radius: var(--radius-xl);
+	background-color: var(--bg-primary);
 }
 
 .emptyIcon {
-	font-size: 3rem;
-	margin-bottom: 1rem;
+	font-size: var(--font-5xl);
+	margin-bottom: var(--spacing-lg);
 }
 
 .emptyText {
-	font-size: 1.2rem;
-	margin-bottom: 1rem;
+	font-size: var(--font-xl);
+	margin-bottom: var(--spacing-lg);
+	color: var(--text-secondary);
 }
 
 .emptyButton {
-	background-color: #007bff;
+	background-color: var(--info-color);
 	color: white;
 	border: none;
-	border-radius: 20px;
-	padding: 12px 24px;
+	border-radius: var(--radius-3xl);
+	padding: var(--spacing-md) var(--spacing-2xl);
 	cursor: pointer;
-	font-size: 16px;
+	font-size: var(--font-lg);
+	transition: var(--transition-normal);
+
+	&:hover {
+		background-color: var(--info-color-dark);
+		transform: translateY(-1px);
+		box-shadow: var(--shadow-md);
+	}
 }
 
 .tip {

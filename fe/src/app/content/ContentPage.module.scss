@@ -1,6 +1,6 @@
 .contentPage {
 	padding: 2rem;
-	background: white;
+	background: var(--bg-glass);
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 	text-align: center;
 }
@@ -8,7 +8,7 @@
 .pageTitle {
 	font-size: 2.5rem;
 	font-weight: 700;
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background: var(--gradient-blue-purple);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
@@ -57,7 +57,7 @@
 .comingSoonSection {
 	margin-top: 3rem;
 	padding: 2rem;
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background: var(--gradient-blue-purple);
 	border-radius: 12px;
 	color: white;
 }

@@ -28,15 +28,17 @@ export const useClickableTags = (
 
 		const inlineTagStyle: React.CSSProperties = {
 			display: 'inline-block',
-			background: isSelected ? '#f59e0b' : 'rgba(245, 158, 11, 0.1)',
-			color: isSelected ? '#0f172a' : '#f59e0b',
+			background: isSelected
+				? 'var(--success-color-light)'
+				: 'rgba(245, 158, 11, 0.1)',
+			color: isSelected ? '#0f172a' : 'var(--success-color-light)',
 			padding: '0.2rem 0.6rem',
 			borderRadius: '8px',
 			fontSize: '0.7rem',
 			fontWeight: isSelected ? '600' : '500',
 			margin: '0.2rem',
 			border: isSelected
-				? '1px solid #f59e0b'
+				? '1px solid var(--success-color-light)'
 				: '1px solid rgba(245, 158, 11, 0.2)',
 			cursor: 'pointer',
 			transition: 'all 0.2s ease',
