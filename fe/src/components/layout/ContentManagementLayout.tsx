@@ -319,7 +319,13 @@ export const ContentManagementLayout: React.FC<
 				{/* Projects Section */}
 				<div className={`${styles.section} ${styles.projectsContentSection}`}>
 					<h3>🚀 Projeler</h3>
-					<p>Proje yönetimi burada olacak</p>
+					<ProjectManager
+						projects={contentData.projects}
+						onUpdateContent={onUpdateContent}
+						isLoading={isLoading}
+						setIsLoading={setIsLoading}
+						setSuccessMessage={setSuccessMessage}
+					/>
 				</div>
 
 				{/* Contact Section */}
@@ -586,6 +592,179 @@ const CareerItem: React.FC<{
 				>
 					👆 Düzenlemek için tıklayın
 				</div>
+			</div>
+		</div>
+	);
+};
+
+// ProjectManager Component
+const ProjectManager: React.FC<{
+	projects: ContentData['projects'];
+	onUpdateContent: (newData: Partial<ContentData>) => void;
+	isLoading: boolean;
+	setIsLoading: (v: boolean) => void;
+	setSuccessMessage: (msg: string) => void;
+}> = ({ projects, onUpdateContent, isLoading, setIsLoading, setSuccessMessage }) => {
+	const [showAdd, setShowAdd] = useState(false);
+	const [editId, setEditId] = useState<string | null>(null);
+	const [form, setForm] = useState({
+		name: '',
+		startDate: '',
+		endDate: '',
+		description: '',
+		logoUrl: '',
+	});
+
+	// Proje ekle
+	const handleAdd = async () => {
+		setIsLoading(true);
+		try {
+			// Backend'e POST isteği
+			const res = await fetch('http://localhost:5000/api/portfolio/projects', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					title: form.name,
+					description: form.description,
+					imageUrl: form.logoUrl,
+					projectUrl: '',
+					githubUrl: '',
+					technologies: [],
+					isActive: true,
+				}),
+			});
+			if (!res.ok) throw new Error('Proje eklenemedi');
+			setSuccessMessage('➕ Proje eklendi!');
+			setShowAdd(false);
+			setForm({ name: '', startDate: '', endDate: '', description: '', logoUrl: '' });
+			// Projeleri tekrar çek
+			const updated = await fetch('http://localhost:5000/api/portfolio/projects').then(r=>r.json());
+			await onUpdateContent({ projects: updated.map((p:any) => ({
+				id: p.id.toString(),
+				name: p.title,
+				startDate: p.createdDate,
+				endDate: p.createdDate,
+				description: p.description,
+				logoUrl: p.imageUrl,
+			})) });
+		} catch (e) {
+			setSuccessMessage('❌ Proje eklenemedi!');
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Proje güncelle
+	const handleEdit = async (id: string) => {
+		setIsLoading(true);
+		try {
+			const res = await fetch(`http://localhost:5000/api/portfolio/projects/${id}`, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					title: form.name,
+					description: form.description,
+					imageUrl: form.logoUrl,
+					projectUrl: '',
+					githubUrl: '',
+					technologies: [],
+					isActive: true,
+				}),
+			});
+			if (!res.ok) throw new Error('Proje güncellenemedi');
+			setSuccessMessage('💾 Proje güncellendi!');
+			setEditId(null);
+			setForm({ name: '', startDate: '', endDate: '', description: '', logoUrl: '' });
+			const updated = await fetch('http://localhost:5000/api/portfolio/projects').then(r=>r.json());
+			await onUpdateContent({ projects: updated.map((p:any) => ({
+				id: p.id.toString(),
+				name: p.title,
+				startDate: p.createdDate,
+				endDate: p.createdDate,
+				description: p.description,
+				logoUrl: p.imageUrl,
+			})) });
+		} catch (e) {
+			setSuccessMessage('❌ Proje güncellenemedi!');
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Proje sil
+	const handleDelete = async (id: string) => {
+		setIsLoading(true);
+		try {
+			const res = await fetch(`http://localhost:5000/api/portfolio/projects/${id}`, {
+				method: 'DELETE',
+			});
+			if (!res.ok) throw new Error('Proje silinemedi');
+			setSuccessMessage('🗑️ Proje silindi!');
+			const updated = await fetch('http://localhost:5000/api/portfolio/projects').then(r=>r.json());
+			await onUpdateContent({ projects: updated.map((p:any) => ({
+				id: p.id.toString(),
+				name: p.title,
+				startDate: p.createdDate,
+				endDate: p.createdDate,
+				description: p.description,
+				logoUrl: p.imageUrl,
+			})) });
+		} catch (e) {
+			setSuccessMessage('❌ Proje silinemedi!');
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// Formu doldur
+	const startEdit = (p: any) => {
+		setEditId(p.id);
+		setForm({
+			name: p.name,
+			startDate: p.startDate,
+			endDate: p.endDate,
+			description: p.description,
+			logoUrl: p.logoUrl,
+		});
+	};
+
+	return (
+		<div>
+			<button className="btn btn--success" onClick={() => setShowAdd(!showAdd)} disabled={isLoading}>
+				{showAdd ? 'İptal' : '➕ Proje Ekle'}
+			</button>
+			{showAdd && (
+				<div style={{margin:'1rem 0',padding:'1rem',background:'#f8f9fa',borderRadius:'8px'}}>
+					<input className="form-input" placeholder="Proje adı" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} />
+					<input className="form-input" placeholder="Açıklama" value={form.description} onChange={e=>setForm({...form,description:e.target.value})} />
+					<input className="form-input" placeholder="Resim URL" value={form.logoUrl} onChange={e=>setForm({...form,logoUrl:e.target.value})} />
+					<button className="btn btn--primary" onClick={handleAdd} disabled={isLoading || !form.name.trim()}>{isLoading ? '⏳' : 'Ekle'}</button>
+				</div>
+			)}
+			<div style={{marginTop:'1rem'}}>
+				{projects.map((p) => (
+					<div key={p.id} style={{background:'#23293a',borderRadius:'12px',margin:'1rem 0',padding:'1rem',display:'flex',alignItems:'center',gap:'1rem'}}>
+						<img src={p.logoUrl} alt={p.name} style={{width:80,height:80,borderRadius:'8px',objectFit:'cover'}} />
+						<div style={{flex:1}}>
+							{editId === p.id ? (
+								<>
+									<input className="form-input" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} />
+									<input className="form-input" value={form.description} onChange={e=>setForm({...form,description:e.target.value})} />
+									<input className="form-input" value={form.logoUrl} onChange={e=>setForm({...form,logoUrl:e.target.value})} />
+									<button className="btn btn--primary btn--small" onClick={()=>handleEdit(p.id)} disabled={isLoading}>{isLoading ? '⏳' : 'Kaydet'}</button>
+									<button className="btn btn--secondary btn--small" onClick={()=>{setEditId(null);setForm({name:'',startDate:'',endDate:'',description:'',logoUrl:''});}} disabled={isLoading}>İptal</button>
+								</>
+							) : (
+								<>
+									<div style={{fontWeight:'bold',fontSize:'1.1rem'}}>{p.name}</div>
+									<div style={{color:'#aaa',fontSize:'0.95rem'}}>{p.description}</div>
+									<button className="btn btn--primary btn--small" onClick={()=>startEdit(p)} disabled={isLoading}>Düzenle</button>
+									<button className="btn btn--danger btn--small" onClick={()=>handleDelete(p.id)} disabled={isLoading}>Sil</button>
+								</>
+							)}
+						</div>
+					</div>
+				))}
 			</div>
 		</div>
 	);

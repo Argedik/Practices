@@ -12,6 +12,7 @@
     "description": "Full Stack Developer ve UI/UX tasar\u0131mc\u0131s\u0131y\u0131m. Modern web teknolojileri ile kullan\u0131c\u0131 dostu \u00E7\u00F6z\u00FCmler geli\u015Ftiriyorum.",
     "skills": [
       "Yeni Yetene3344232",
+      "Yeni Yetenek2",
       "Yeni Yetenek2"
     ],
     "detailedSkills": [
@@ -22,6 +23,10 @@
       {
         "name": "Yeni Yetenek2",
         "proficiency": 55
+      },
+      {
+        "name": "Yeni Yetenek2",
+        "proficiency": 88
       }
     ],
     "yearsExperience": 5,
@@ -41,6 +46,17 @@
         "MongoDB"
       ],
       "createdDate": "2025-03-04T07:59:22.0616294+03:00",
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "title": "Yeni Proje",
+      "description": "Proje a\u00E7\u0131klamas\u0131 buraya gelecek",
+      "imageUrl": "/images/project2.jpg",
+      "projectUrl": "",
+      "githubUrl": "",
+      "technologies": [],
+      "createdDate": "2025-06-14T15:54:57.3847757+03:00",
       "isActive": true
     }
   ],
