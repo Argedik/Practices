@@ -13,7 +13,8 @@
     "skills": [
       "Yeni Yetene3344232",
       "Yeni Yetenek2",
-      "Yeni Yetenek2"
+      "Yeni Yetenek2",
+      "Yeni Yetenek"
     ],
     "detailedSkills": [
       {
@@ -27,6 +28,10 @@
       {
         "name": "Yeni Yetenek2",
         "proficiency": 88
+      },
+      {
+        "name": "Yeni Yetenek",
+        "proficiency": 70
       }
     ],
     "yearsExperience": 5,
