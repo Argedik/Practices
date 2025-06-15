@@ -7,6 +7,8 @@ public class PortfolioContent
     public AboutMe About { get; set; } = new();
     public List<Project> Projects { get; set; } = new();
     public List<Experience> Experiences { get; set; } = new();
+    public List<string> Cities { get; set; } = new();
+    public List<SocialMediaAccount> SocialMedia { get; set; } = new();
     public ContactInfo Contact { get; set; } = new();
     public ThemeSettings Theme { get; set; } = new();
 }
@@ -54,29 +56,55 @@ public class Project
     public bool IsActive { get; set; } = true;
 }
 
-// Deneyim modeli
+// Deneyim modeli - Frontend CareerData formatına uygun
 public class Experience
 {
     public int Id { get; set; }
     public string Company { get; set; } = "";
     public string Position { get; set; } = "";
     public string Description { get; set; } = "";
-    public DateTime StartDate { get; set; }
-    public DateTime? EndDate { get; set; }
-    public bool IsCurrent { get; set; }
-    public string Type { get; set; } = "work"; // work, education
+    public string StartDate { get; set; } = ""; // Frontend'de string olarak kullanılıyor
+    public string EndDate { get; set; } = ""; // Frontend'de string olarak kullanılıyor
+    public string Location { get; set; } = "";
+    public string WorkType { get; set; } = "";
+    public string LogoUrl { get; set; } = "";
+    public bool IsActive { get; set; } = true;
+    public DateTime LastUpdated { get; set; } = DateTime.Now;
+}
+
+// Sosyal medya hesabı modeli
+public class SocialMediaAccount
+{
+    public int Id { get; set; }
+    public string Platform { get; set; } = "";
+    public string Url { get; set; } = "";
+    public string Icon { get; set; } = "";
+    public bool IsActive { get; set; } = true;
+    public DateTime LastUpdated { get; set; } = DateTime.Now;
 }
 
 // İletişim bilgileri
 public class ContactInfo
 {
-    public string Email { get; set; } = "";
-    public string Phone { get; set; } = "";
+    public List<EmailContact> Emails { get; set; } = new();
+    public List<PhoneContact> Phones { get; set; } = new();
     public string Location { get; set; } = "";
     public SocialMedia Social { get; set; } = new();
 }
 
-// Sosyal medya
+public class EmailContact
+{
+    public string Value { get; set; } = "";
+    public bool Enabled { get; set; } = true;
+}
+
+public class PhoneContact
+{
+    public string Value { get; set; } = "";
+    public bool Enabled { get; set; } = true;
+}
+
+// Sosyal medya (eski format - geriye uyumluluk için)
 public class SocialMedia
 {
     public string LinkedIn { get; set; } = "";

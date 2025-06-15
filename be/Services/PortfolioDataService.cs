@@ -64,6 +64,55 @@ public class PortfolioDataService
                     IsActive = true
                 }
             },
+            Experiences = new List<Experience>
+            {
+                new Experience
+                {
+                    Id = 1,
+                    Company = "TechCorp A.Ş.",
+                    Position = "Senior Frontend Developer",
+                    Description = "React, TypeScript ve Next.js kullanarak modern web uygulamaları geliştiriyorum.",
+                    StartDate = "2022-01-01",
+                    EndDate = "2024-12-31",
+                    Location = "İstanbul",
+                    WorkType = "Tam Zamanlı",
+                    LogoUrl = "https://picsum.photos/60/60?random=1",
+                    IsActive = true,
+                    LastUpdated = DateTime.Now
+                }
+            },
+            Cities = new List<string>
+            {
+                "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir",
+                "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli",
+                "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari",
+                "Hatay", "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir",
+                "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir",
+                "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat",
+                "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman",
+                "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"
+            },
+            SocialMedia = new List<SocialMediaAccount>
+            {
+                new SocialMediaAccount
+                {
+                    Id = 1,
+                    Platform = "LinkedIn",
+                    Url = "https://linkedin.com/in/johndoe",
+                    Icon = "💼",
+                    IsActive = true,
+                    LastUpdated = DateTime.Now
+                },
+                new SocialMediaAccount
+                {
+                    Id = 2,
+                    Platform = "GitHub",
+                    Url = "https://github.com/johndoe",
+                    Icon = "🐙",
+                    IsActive = true,
+                    LastUpdated = DateTime.Now
+                }
+            },
             Contact = new ContactInfo
             {
                 Email = "john@example.com",
@@ -181,6 +230,125 @@ public class PortfolioDataService
         
         data.Projects.Remove(project);
         return await SavePortfolioDataAsync(data);
+    }
+
+    // Deneyim ekle
+    public async Task<Experience?> AddExperienceAsync(Experience experience)
+    {
+        var data = await GetPortfolioDataAsync();
+        experience.Id = data.Experiences.Any() ? data.Experiences.Max(e => e.Id) + 1 : 1;
+        experience.LastUpdated = DateTime.Now;
+        
+        data.Experiences.Add(experience);
+        
+        if (await SavePortfolioDataAsync(data))
+        {
+            return experience;
+        }
+        
+        return null;
+    }
+
+    // Deneyim güncelle
+    public async Task<bool> UpdateExperienceAsync(int id, Experience experience)
+    {
+        var data = await GetPortfolioDataAsync();
+        var existingExperience = data.Experiences.FirstOrDefault(e => e.Id == id);
+        
+        if (existingExperience == null) return false;
+        
+        experience.Id = id;
+        experience.LastUpdated = DateTime.Now;
+        
+        var index = data.Experiences.FindIndex(e => e.Id == id);
+        data.Experiences[index] = experience;
+        
+        return await SavePortfolioDataAsync(data);
+    }
+
+    // Deneyim sil
+    public async Task<bool> DeleteExperienceAsync(int id)
+    {
+        var data = await GetPortfolioDataAsync();
+        var experience = data.Experiences.FirstOrDefault(e => e.Id == id);
+        
+        if (experience == null) return false;
+        
+        data.Experiences.Remove(experience);
+        return await SavePortfolioDataAsync(data);
+    }
+
+    // Sosyal medya hesabı ekle
+    public async Task<SocialMediaAccount?> AddSocialMediaAsync(SocialMediaAccount socialMedia)
+    {
+        var data = await GetPortfolioDataAsync();
+        socialMedia.Id = data.SocialMedia.Any() ? data.SocialMedia.Max(s => s.Id) + 1 : 1;
+        socialMedia.LastUpdated = DateTime.Now;
+        
+        // Platform ikonunu otomatik belirle
+        socialMedia.Icon = GetPlatformIcon(socialMedia.Platform);
+        
+        data.SocialMedia.Add(socialMedia);
+        
+        if (await SavePortfolioDataAsync(data))
+        {
+            return socialMedia;
+        }
+        
+        return null;
+    }
+
+    // Sosyal medya hesabını güncelle
+    public async Task<bool> UpdateSocialMediaAsync(int id, SocialMediaAccount socialMedia)
+    {
+        var data = await GetPortfolioDataAsync();
+        var existingSocialMedia = data.SocialMedia.FirstOrDefault(s => s.Id == id);
+        
+        if (existingSocialMedia == null) return false;
+        
+        socialMedia.Id = id;
+        socialMedia.LastUpdated = DateTime.Now;
+        
+        // Platform ikonunu otomatik belirle
+        socialMedia.Icon = GetPlatformIcon(socialMedia.Platform);
+        
+        var index = data.SocialMedia.FindIndex(s => s.Id == id);
+        data.SocialMedia[index] = socialMedia;
+        
+        return await SavePortfolioDataAsync(data);
+    }
+
+    // Sosyal medya hesabını sil
+    public async Task<bool> DeleteSocialMediaAsync(int id)
+    {
+        var data = await GetPortfolioDataAsync();
+        var socialMedia = data.SocialMedia.FirstOrDefault(s => s.Id == id);
+        
+        if (socialMedia == null) return false;
+        
+        data.SocialMedia.Remove(socialMedia);
+        return await SavePortfolioDataAsync(data);
+    }
+
+    // Platform ikonunu belirle
+    private string GetPlatformIcon(string platform)
+    {
+        var icons = new Dictionary<string, string>
+        {
+            { "LinkedIn", "💼" },
+            { "GitHub", "🐙" },
+            { "Twitter", "🐦" },
+            { "Instagram", "📷" },
+            { "Facebook", "📘" },
+            { "YouTube", "🎥" },
+            { "TikTok", "🎵" },
+            { "Discord", "🎮" },
+            { "WhatsApp", "💬" },
+            { "Telegram", "📱" },
+            { "Website", "🌐" }
+        };
+        
+        return icons.ContainsKey(platform) ? icons[platform] : "🌐";
     }
 
     // Tema ayarlarını güncelle

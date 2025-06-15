@@ -5,6 +5,4 @@ be/bin/
 .env.local
 Cargo.lock
 target
-be/bin/Debug/net9.0/be.dll
-be/bin/Debug/net9.0/be.pdb
-be/bin/Debug/net9.0/Data/admin-settings.json
+be/bin/Debug/net9.0

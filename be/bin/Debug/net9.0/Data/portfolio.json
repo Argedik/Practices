@@ -13,7 +13,8 @@
     "skills": [
       "Yeni Yetene3344232",
       "Yeni Yetenek2",
-      "Yeni Yetenek2"
+      "Yeni Yetenek2",
+      "Yeni Yetenek"
     ],
     "detailedSkills": [
       {
@@ -27,6 +28,10 @@
       {
         "name": "Yeni Yetenek2",
         "proficiency": 88
+      },
+      {
+        "name": "Yeni Yetenek",
+        "proficiency": 70
       }
     ],
     "yearsExperience": 5,
@@ -47,27 +52,71 @@
       ],
       "createdDate": "2025-03-04T07:59:22.0616294+03:00",
       "isActive": true
+    }
+  ],
+  "experiences": [
+    {
+      "id": 2,
+      "company": "Test \u015Eirket",
+      "position": "Test Pozisyon",
+      "description": "Test a\u00E7\u0131klama",
+      "startDate": "2024-01-01",
+      "endDate": "2024-12-31",
+      "location": "Test \u015Eehir",
+      "workType": "Tam Zamanl\u0131",
+      "logoUrl": "https://picsum.photos/60/60?random=T",
+      "isActive": true,
+      "lastUpdated": "2025-06-16T00:25:52.5317524+03:00"
+    },
+    {
+      "id": 3,
+      "company": "Yeni \u015Eirket",
+      "position": "Pozisyon Ad\u0131",
+      "description": "\u0130\u015F tan\u0131m\u0131n\u0131z\u0131 buraya yaz\u0131n...",
+      "startDate": "2025-06-15",
+      "endDate": "2025-06-15",
+      "location": "\u015Eehir",
+      "workType": "Tam Zamanl\u0131",
+      "logoUrl": "https://picsum.photos/60/60?random=N",
+      "isActive": true,
+      "lastUpdated": "2025-06-16T00:26:29.662475+03:00"
+    }
+  ],
+  "cities": [
+    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir",
+    "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli",
+    "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari",
+    "Hatay", "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir",
+    "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir",
+    "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat",
+    "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman",
+    "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"
+  ],
+  "socialMedia": [
+    {
+      "id": 1,
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com/in/johndoe",
+      "icon": "💼",
+      "isActive": true,
+      "lastUpdated": "2025-06-16T00:00:00.0000000+03:00"
     },
     {
       "id": 2,
-      "title": "Yeni Proje",
-      "description": "Proje a\u00E7\u0131klamas\u0131 buraya gelecek",
-      "imageUrl": "/images/project2.jpg",
-      "projectUrl": "",
-      "githubUrl": "",
-      "technologies": [],
-      "createdDate": "2025-06-14T15:54:57.3847757+03:00",
-      "isActive": true
+      "platform": "GitHub",
+      "url": "https://github.com/johndoe",
+      "icon": "🐙",
+      "isActive": true,
+      "lastUpdated": "2025-06-16T00:00:00.0000000+03:00"
     }
   ],
-  "experiences": [],
   "contact": {
-    "email": "john@example.com",
+    "email": "john.doe@example.com2",
     "phone": "\u002B90 555 123 45 67",
     "location": "\u0130stanbul, T\u00FCrkiye",
     "social": {
-      "linkedIn": "linkedin.com/in/johndoe",
-      "gitHub": "github.com/johndoe",
+      "linkedIn": "",
+      "gitHub": "",
       "twitter": "",
       "instagram": "",
       "website": ""

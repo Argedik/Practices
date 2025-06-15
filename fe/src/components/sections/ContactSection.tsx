@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { InlineEditor } from '../ui/InlineEditor';
 
 interface ContactSectionProps {
@@ -32,37 +32,232 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 	onUpdateSocialMedia,
 	onUpdateContact,
 }) => {
-	const addSocialMedia = () => {
-		const newSocialMedia = {
-			id: Date.now().toString(),
-			platform: 'Yeni Platform',
-			url: 'https://',
-		};
-		onUpdateSocialMedia([...socialMedia, newSocialMedia]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [successMessage, setSuccessMessage] = useState('');
+
+	// Sosyal medya hesabı ekle - Backend'e kaydet
+	const addSocialMedia = async () => {
+		if (isLoading) return; // Çift tıklamayı kesin engelle
+		setIsLoading(true);
+		try {
+			const newSocialMedia = {
+				platform: 'Yeni Platform',
+				url: 'https://',
+				isActive: true,
+			};
+
+			console.log('🌐 Backend API\'ye POST isteği gönderiliyor...');
+			console.log('📤 Gönderilen Veri:', newSocialMedia);
+
+			const response = await fetch('http://localhost:5000/api/portfolio/social-media', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(newSocialMedia),
+			});
+
+			console.log('📥 API Yanıtı:', { 
+				status: response.status, 
+				ok: response.ok,
+				statusText: response.statusText,
+				url: response.url
+			});
+
+			if (!response.ok) {
+				const errorText = await response.text();
+				console.error('❌ API Error Response:', errorText);
+				throw new Error(`Sosyal medya hesabı eklenemedi: ${response.status} ${response.statusText} - ${errorText}`);
+			}
+
+			const addedSocialMedia = await response.json();
+			console.log('✅ API Başarılı Yanıt:', addedSocialMedia);
+
+			// Güncel sosyal medya hesaplarını çek
+			await refreshSocialMedia();
+			setSuccessMessage('➕ Sosyal medya hesabı başarıyla eklendi!');
+
+		} catch (error) {
+			console.error('❌ Sosyal Medya Ekleme Hatası:', error);
+			setSuccessMessage(`❌ Sosyal medya hesabı eklenemedi: ${error instanceof Error ? error.message : 'Bilinmeyen hata'}`);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	const updateSocialMedia = (
-		id: string,
-		field: 'platform' | 'url',
-		value: string
-	) => {
-		const updated = socialMedia.map((item) =>
-			item.id === id ? { ...item, [field]: value } : item
-		);
-		onUpdateSocialMedia(updated);
+	// Sosyal medya hesabını güncelle - Backend'e kaydet
+	const updateSocialMedia = async (id: string, field: 'platform' | 'url', value: string) => {
+		console.log('✏️ Sosyal Medya Güncelleme:', { id, field, value });
+		setIsLoading(true);
+
+		try {
+			// Önce mevcut hesabı bul
+			const currentSocialMedia = socialMedia.find(s => s.id === id);
+			if (!currentSocialMedia) {
+				throw new Error('Sosyal medya hesabı bulunamadı');
+			}
+
+			// Güncellenmiş hesap objesi
+			const updatedSocialMedia = {
+				...currentSocialMedia,
+				[field]: value,
+			};
+
+			// Backend formatına çevir
+			const backendSocialMedia = {
+				platform: updatedSocialMedia.platform,
+				url: updatedSocialMedia.url,
+				isActive: true,
+			};
+
+			console.log('🌐 Backend API\'ye PUT isteği gönderiliyor...');
+			console.log('📤 Gönderilen Veri:', backendSocialMedia);
+
+			const response = await fetch(`http://localhost:5000/api/portfolio/social-media/${id}`, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(backendSocialMedia),
+			});
+
+			console.log('📥 API Yanıtı:', { status: response.status, ok: response.ok });
+
+			if (!response.ok) {
+				throw new Error('Sosyal medya hesabı güncellenemedi');
+			}
+
+			console.log('✅ API Başarılı Yanıt');
+
+			// Güncel sosyal medya hesaplarını çek
+			await refreshSocialMedia();
+			setSuccessMessage('💾 Sosyal medya hesabı başarıyla güncellendi!');
+
+		} catch (error) {
+			console.error('❌ Sosyal Medya Güncelleme Hatası:', error);
+			setSuccessMessage('❌ Sosyal medya hesabı güncellenemedi!');
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	const removeSocialMedia = (id: string) => {
-		const updated = socialMedia.filter((item) => item.id !== id);
-		onUpdateSocialMedia(updated);
+	// Sosyal medya hesabını sil - Backend'den sil
+	const removeSocialMedia = async (id: string) => {
+		console.log('🗑️ Sosyal Medya Silme:', { id });
+		setIsLoading(true);
+
+		try {
+			console.log('🌐 Backend API\'ye DELETE isteği gönderiliyor...');
+
+			const response = await fetch(`http://localhost:5000/api/portfolio/social-media/${id}`, {
+				method: 'DELETE',
+			});
+
+			console.log('📥 API Yanıtı:', { status: response.status, ok: response.ok });
+
+			if (!response.ok) {
+				throw new Error('Sosyal medya hesabı silinemedi');
+			}
+
+			console.log('✅ API Başarılı Yanıt');
+
+			// Güncel sosyal medya hesaplarını çek
+			await refreshSocialMedia();
+			setSuccessMessage('🗑️ Sosyal medya hesabı başarıyla silindi!');
+
+		} catch (error) {
+			console.error('❌ Sosyal Medya Silme Hatası:', error);
+			setSuccessMessage('❌ Sosyal medya hesabı silinemedi!');
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	const updateContact = (
+	// Güncel sosyal medya hesaplarını backend'den çek
+	const refreshSocialMedia = async () => {
+		try {
+			console.log('🔄 Güncel sosyal medya hesapları çekiliyor...');
+			const response = await fetch('http://localhost:5000/api/portfolio/social-media');
+			
+			if (!response.ok) {
+				throw new Error('Sosyal medya hesapları çekilemedi');
+			}
+
+			const backendSocialMedia = await response.json();
+			console.log('📦 Backend Sosyal Medya:', backendSocialMedia);
+
+			// Backend formatını frontend formatına çevir
+			const frontendSocialMedia = backendSocialMedia.map((social: any) => ({
+				id: social.id.toString(),
+				platform: social.platform,
+				url: social.url,
+			}));
+
+			console.log('🔄 Frontend Sosyal Medya:', frontendSocialMedia);
+			onUpdateSocialMedia(frontendSocialMedia);
+
+		} catch (error) {
+			console.error('❌ Sosyal Medya Çekme Hatası:', error);
+		}
+	};
+
+	// İletişim bilgilerini güncelle - Backend'e kaydet
+	const updateContact = async (
 		field: string,
 		value: ContactSectionProps['contact'][keyof ContactSectionProps['contact']]
 	) => {
-		onUpdateContact({ ...contact, [field]: value });
+		console.log('✏️ İletişim Bilgisi Güncelleme:', { field, value });
+		setIsLoading(true);
+
+		try {
+			const updatedContact = { ...contact, [field]: value };
+
+			// Backend formatına çevir
+			const backendContact = {
+				email: updatedContact.email.value,
+				phone: updatedContact.phone.value,
+				location: 'İstanbul, Türkiye', // Varsayılan lokasyon
+				social: {
+					linkedIn: '',
+					github: '',
+					twitter: '',
+					instagram: '',
+					website: '',
+				},
+			};
+
+			console.log('🌐 Backend API\'ye PUT isteği gönderiliyor...');
+			console.log('📤 Gönderilen Veri:', backendContact);
+
+			const response = await fetch('http://localhost:5000/api/portfolio/contact', {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(backendContact),
+			});
+
+			console.log('📥 API Yanıtı:', { status: response.status, ok: response.ok });
+
+			if (!response.ok) {
+				throw new Error('İletişim bilgileri güncellenemedi');
+			}
+
+			console.log('✅ API Başarılı Yanıt');
+			onUpdateContact(updatedContact);
+			setSuccessMessage('💾 İletişim bilgileri başarıyla güncellendi!');
+
+		} catch (error) {
+			console.error('❌ İletişim Güncelleme Hatası:', error);
+			setSuccessMessage('❌ İletişim bilgileri güncellenemedi!');
+		} finally {
+			setIsLoading(false);
+		}
 	};
+
+	// Success mesajını otomatik temizle
+	useEffect(() => {
+		if (successMessage) {
+			const timer = setTimeout(() => {
+				setSuccessMessage('');
+			}, 3000);
+			return () => clearTimeout(timer);
+		}
+	}, [successMessage]);
 
 	const sectionStyle: React.CSSProperties = {
 		padding: '2rem',
@@ -118,6 +313,26 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
 	return (
 		<div style={sectionStyle}>
+			{/* Success Message */}
+			{successMessage && (
+				<div
+					style={{
+						position: 'fixed',
+						top: '20px',
+						right: '20px',
+						backgroundColor: successMessage.includes('❌') ? '#dc3545' : '#28a745',
+						color: 'white',
+						padding: '1rem 1.5rem',
+						borderRadius: '8px',
+						boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+						zIndex: 1000,
+						fontSize: '0.9rem',
+					}}
+				>
+					{successMessage}
+				</div>
+			)}
+
 			<h3
 				style={{ margin: '0 0 2rem 0', color: '#e2e8f0', fontSize: '1.8rem' }}
 			>
@@ -253,17 +468,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 						🌐 Sosyal Medya
 						<button
 							onClick={addSocialMedia}
+							disabled={isLoading}
 							style={{
-								backgroundColor: '#28a745',
+								backgroundColor: isLoading ? '#6c757d' : '#28a745',
 								color: 'white',
 								border: 'none',
 								borderRadius: '15px',
 								padding: '4px 12px',
-								cursor: 'pointer',
+								cursor: isLoading ? 'not-allowed' : 'pointer',
 								fontSize: '12px',
+								opacity: isLoading ? 0.7 : 1,
 							}}
 						>
-							➕ Ekle
+							{isLoading ? '⏳' : '➕ Ekle'}
 						</button>
 					</h4>
 
@@ -281,19 +498,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 							<p style={{ margin: '0 0 1rem 0' }}>
 								Henüz sosyal medya hesabı eklenmedi
 							</p>
-							<button
-								onClick={addSocialMedia}
-								style={{
-									backgroundColor: '#007bff',
-									color: 'white',
-									border: 'none',
-									borderRadius: '20px',
-									padding: '8px 16px',
-									cursor: 'pointer',
-								}}
-							>
-								İlk Hesabınızı Ekleyin
-							</button>
 						</div>
 					)}
 
@@ -348,6 +552,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 							</div>
 						</div>
 					))}
+				</div>
+			</div>
+
+			{/* Bilgilendirme */}
+			<div
+				style={{
+					backgroundColor: '#1a202c',
+					border: '1px solid #4a5568',
+					borderRadius: '8px',
+					padding: '1rem',
+					marginTop: '1rem',
+				}}
+			>
+				<div style={{ color: '#a0aec0', fontSize: '0.9rem' }}>
+					💡 <strong>İpucu:</strong> Tüm alanları tıklayarak
+					düzenleyebilirsiniz. Sosyal medya hesaplarınızı ekleyip güncelleyebilirsiniz.
 				</div>
 			</div>
 		</div>

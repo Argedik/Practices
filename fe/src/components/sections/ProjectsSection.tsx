@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { InlineEditor } from '../ui/InlineEditor';
 
 interface ProjectItem {
@@ -21,34 +21,185 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 	data,
 	onUpdate,
 }) => {
-	const addProject = () => {
-		const newProject: ProjectItem = {
-			id: Date.now().toString(),
-			name: 'Yeni Proje',
-			startDate: new Date().toISOString().split('T')[0],
-			endDate: new Date().toISOString().split('T')[0],
-			description: 'Proje açıklaması buraya gelecek',
-			logoUrl:
-				'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop',
-		};
-		onUpdate([...data, newProject]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [successMessage, setSuccessMessage] = useState('');
+
+	// Proje ekle - Backend'e kaydet
+	const addProject = async () => {
+		console.log('➕ Proje Ekleme Başlatıldı');
+		setIsLoading(true);
+
+		try {
+			const newProject = {
+				title: 'Yeni Proje',
+				description: 'Proje açıklaması buraya gelecek',
+				imageUrl: 'https://picsum.photos/200/300',
+				projectUrl: '',
+				githubUrl: '',
+				technologies: [],
+				isActive: true,
+			};
+
+			console.log('🌐 Backend API\'ye POST isteği gönderiliyor...');
+			console.log('📤 Gönderilen Veri:', newProject);
+
+			const response = await fetch('http://localhost:5000/api/portfolio/projects', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(newProject),
+			});
+
+			console.log('📥 API Yanıtı:', { status: response.status, ok: response.ok });
+
+			if (!response.ok) {
+				throw new Error('Proje eklenemedi');
+			}
+
+			const addedProject = await response.json();
+			console.log('✅ API Başarılı Yanıt:', addedProject);
+
+			// Güncel projeleri çek
+			await refreshProjects();
+			setSuccessMessage('➕ Proje başarıyla eklendi!');
+
+		} catch (error) {
+			console.error('❌ Proje Ekleme Hatası:', error);
+			setSuccessMessage('❌ Proje eklenemedi!');
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	const updateProject = (
-		id: string,
-		field: keyof ProjectItem,
-		value: string
-	) => {
-		const updatedProjects = data.map((project) =>
-			project.id === id ? { ...project, [field]: value } : project
-		);
-		onUpdate(updatedProjects);
+	// Proje güncelle - Backend'e kaydet
+	const updateProject = async (id: string, field: keyof ProjectItem, value: string) => {
+		console.log('✏️ Proje Güncelleme:', { id, field, value });
+		setIsLoading(true);
+
+		try {
+			// Önce mevcut projeyi bul
+			const currentProject = data.find(p => p.id === id);
+			if (!currentProject) {
+				throw new Error('Proje bulunamadı');
+			}
+
+			// Güncellenmiş proje objesi
+			const updatedProject = {
+				...currentProject,
+				[field]: value,
+			};
+
+			// Backend formatına çevir
+			const backendProject = {
+				title: updatedProject.name,
+				description: updatedProject.description,
+				imageUrl: updatedProject.logoUrl,
+				projectUrl: '',
+				githubUrl: '',
+				technologies: [],
+				isActive: true,
+			};
+
+			console.log('🌐 Backend API\'ye PUT isteği gönderiliyor...');
+			console.log('📤 Gönderilen Veri:', backendProject);
+
+			const response = await fetch(`http://localhost:5000/api/portfolio/projects/${id}`, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(backendProject),
+			});
+
+			console.log('📥 API Yanıtı:', { status: response.status, ok: response.ok });
+
+			if (!response.ok) {
+				throw new Error('Proje güncellenemedi');
+			}
+
+			console.log('✅ API Başarılı Yanıt');
+
+			// Güncel projeleri çek
+			await refreshProjects();
+			setSuccessMessage('💾 Proje başarıyla güncellendi!');
+
+		} catch (error) {
+			console.error('❌ Proje Güncelleme Hatası:', error);
+			setSuccessMessage('❌ Proje güncellenemedi!');
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
-	const removeProject = (id: string) => {
-		const updatedProjects = data.filter((project) => project.id !== id);
-		onUpdate(updatedProjects);
+	// Proje sil - Backend'den sil
+	const removeProject = async (id: string) => {
+		console.log('🗑️ Proje Silme:', { id });
+		setIsLoading(true);
+
+		try {
+			console.log('🌐 Backend API\'ye DELETE isteği gönderiliyor...');
+
+			const response = await fetch(`http://localhost:5000/api/portfolio/projects/${id}`, {
+				method: 'DELETE',
+			});
+
+			console.log('📥 API Yanıtı:', { status: response.status, ok: response.ok });
+
+			if (!response.ok) {
+				throw new Error('Proje silinemedi');
+			}
+
+			console.log('✅ API Başarılı Yanıt');
+
+			// Güncel projeleri çek
+			await refreshProjects();
+			setSuccessMessage('🗑️ Proje başarıyla silindi!');
+
+		} catch (error) {
+			console.error('❌ Proje Silme Hatası:', error);
+			setSuccessMessage('❌ Proje silinemedi!');
+		} finally {
+			setIsLoading(false);
+		}
 	};
+
+	// Güncel projeleri backend'den çek
+	const refreshProjects = async () => {
+		try {
+			console.log('🔄 Güncel projeler çekiliyor...');
+			const response = await fetch('http://localhost:5000/api/portfolio/projects');
+			
+			if (!response.ok) {
+				throw new Error('Projeler çekilemedi');
+			}
+
+			const backendProjects = await response.json();
+			console.log('📦 Backend Projeler:', backendProjects);
+
+			// Backend formatını frontend formatına çevir
+			const frontendProjects = backendProjects.map((project: any) => ({
+				id: project.id.toString(),
+				name: project.title,
+				startDate: project.createdDate ? new Date(project.createdDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+				endDate: project.createdDate ? new Date(project.createdDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+				description: project.description,
+				logoUrl: project.imageUrl || '',
+			}));
+
+			console.log('🔄 Frontend Projeler:', frontendProjects);
+			onUpdate(frontendProjects);
+
+		} catch (error) {
+			console.error('❌ Projeler Çekme Hatası:', error);
+		}
+	};
+
+	// Success mesajını otomatik temizle
+	useEffect(() => {
+		if (successMessage) {
+			const timer = setTimeout(() => {
+				setSuccessMessage('');
+			}, 3000);
+			return () => clearTimeout(timer);
+		}
+	}, [successMessage]);
 
 	const sectionStyle: React.CSSProperties = {
 		padding: '2rem',
@@ -92,8 +243,109 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 		});
 	};
 
+	// Tarih seçici component
+	const DatePicker = ({ value, onChange, label }: { value: string, onChange: (value: string) => void, label: string }) => {
+		const [isEditing, setIsEditing] = useState(false);
+		const [tempValue, setTempValue] = useState(value);
+
+		const handleSave = () => {
+			onChange(tempValue);
+			setIsEditing(false);
+		};
+
+		const handleCancel = () => {
+			setTempValue(value);
+			setIsEditing(false);
+		};
+
+		if (isEditing) {
+			return (
+				<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+					<input
+						type="date"
+						value={tempValue}
+						onChange={(e) => setTempValue(e.target.value)}
+						style={{
+							padding: '0.25rem 0.5rem',
+							border: '1px solid #4a5568',
+							borderRadius: '4px',
+							backgroundColor: '#2d3748',
+							color: '#e2e8f0',
+							fontSize: '0.9rem',
+						}}
+					/>
+					<button
+						onClick={handleSave}
+						style={{
+							backgroundColor: '#28a745',
+							color: 'white',
+							border: 'none',
+							borderRadius: '4px',
+							padding: '0.25rem 0.5rem',
+							cursor: 'pointer',
+							fontSize: '0.8rem',
+						}}
+					>
+						💾
+					</button>
+					<button
+						onClick={handleCancel}
+						style={{
+							backgroundColor: '#dc3545',
+							color: 'white',
+							border: 'none',
+							borderRadius: '4px',
+							padding: '0.25rem 0.5rem',
+							cursor: 'pointer',
+							fontSize: '0.8rem',
+						}}
+					>
+						❌
+					</button>
+				</div>
+			);
+		}
+
+		return (
+			<span
+				onClick={() => setIsEditing(true)}
+				style={{
+					cursor: 'pointer',
+					padding: '0.25rem 0.5rem',
+					borderRadius: '4px',
+					backgroundColor: '#374151',
+					color: '#e2e8f0',
+					fontSize: '0.9rem',
+				}}
+				title="Tarihi değiştirmek için tıklayın"
+			>
+				{formatDate(value)}
+			</span>
+		);
+	};
+
 	return (
 		<div style={sectionStyle}>
+			{/* Success Message */}
+			{successMessage && (
+				<div
+					style={{
+						position: 'fixed',
+						top: '20px',
+						right: '20px',
+						backgroundColor: successMessage.includes('❌') ? '#dc3545' : '#28a745',
+						color: 'white',
+						padding: '1rem 1.5rem',
+						borderRadius: '8px',
+						boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+						zIndex: 1000,
+						fontSize: '0.9rem',
+					}}
+				>
+					{successMessage}
+				</div>
+			)}
+
 			<div
 				style={{
 					display: 'flex',
@@ -107,17 +359,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 				</h3>
 				<button
 					onClick={addProject}
+					disabled={isLoading}
 					style={{
-						backgroundColor: '#28a745',
+						backgroundColor: isLoading ? '#6c757d' : '#28a745',
 						color: 'white',
 						border: 'none',
 						borderRadius: '20px',
 						padding: '8px 16px',
-						cursor: 'pointer',
+						cursor: isLoading ? 'not-allowed' : 'pointer',
 						fontSize: '14px',
+						opacity: isLoading ? 0.7 : 1,
 					}}
 				>
-					➕ Proje Ekle
+					{isLoading ? '⏳ Ekleniyor...' : '➕ Proje Ekle'}
 				</button>
 			</div>
 
@@ -137,17 +391,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 					</p>
 					<button
 						onClick={addProject}
+						disabled={isLoading}
 						style={{
-							backgroundColor: '#007bff',
+							backgroundColor: isLoading ? '#6c757d' : '#007bff',
 							color: 'white',
 							border: 'none',
 							borderRadius: '20px',
 							padding: '10px 20px',
-							cursor: 'pointer',
+							cursor: isLoading ? 'not-allowed' : 'pointer',
 							fontSize: '16px',
+							opacity: isLoading ? 0.7 : 1,
 						}}
 					>
-						İlk Projenizi Ekleyin
+						{isLoading ? '⏳ Ekleniyor...' : 'İlk Projenizi Ekleyin'}
 					</button>
 				</div>
 			)}
@@ -210,23 +466,17 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 							}}
 						>
 							<span>📅</span>
-							<InlineEditor
-								initialValue={project.startDate}
-								onSave={(value) =>
-									updateProject(project.id, 'startDate', value)
-								}
-								style={{ display: 'inline-block' }}
-							>
-								<span>{formatDate(project.startDate)}</span>
-							</InlineEditor>
+							<DatePicker
+								value={project.startDate}
+								onChange={(value) => updateProject(project.id, 'startDate', value)}
+								label="Başlangıç"
+							/>
 							<span>-</span>
-							<InlineEditor
-								initialValue={project.endDate}
-								onSave={(value) => updateProject(project.id, 'endDate', value)}
-								style={{ display: 'inline-block' }}
-							>
-								<span>{formatDate(project.endDate)}</span>
-							</InlineEditor>
+							<DatePicker
+								value={project.endDate}
+								onChange={(value) => updateProject(project.id, 'endDate', value)}
+								label="Bitiş"
+							/>
 						</div>
 
 						{/* Proje Açıklaması */}

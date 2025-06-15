@@ -126,6 +126,27 @@ export const Homepage = () => {
 							logoUrl: project.imageUrl || '',
 						})
 					) || [],
+				socialMedia: portfolioData.socialMedia
+					? portfolioData.socialMedia.map((item: any) => ({
+							id: item.id.toString(),
+							platform: item.platform,
+							url: item.url,
+					  }))
+					: [],
+				contact: {
+					phone: { enabled: true, value: portfolioData.contact?.phone || '' },
+					email: { enabled: true, value: portfolioData.contact?.email || '' },
+					whatsapp: true,
+					telegram: false,
+					position: 'left',
+				},
+				contactForm: {
+					enabled: true,
+					recipientEmail: portfolioData.contact?.email || '',
+					nameRequired: true,
+					phoneRequired: false,
+					reasonOptions: ['İş için', 'Proje için', 'Genel'],
+				},
 			};
 
 			setContentData((prev) => ({ ...prev, ...convertedData }));
