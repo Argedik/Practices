@@ -207,14 +207,6 @@
       "lastUpdated": "2025-06-16T00:00:00+03:00"
     },
     {
-      "id": 3,
-      "platform": "Yeni Platform",
-      "url": "https://",
-      "icon": "\uD83C\uDF10",
-      "isActive": true,
-      "lastUpdated": "2025-06-16T00:38:25.9247358+03:00"
-    },
-    {
       "id": 5,
       "platform": "Yeni Platform",
       "url": "https://",
@@ -236,12 +228,20 @@
       "url": "https://",
       "icon": "\uD83C\uDF10",
       "isActive": true,
-      "lastUpdated": "2025-06-16T00:42:11.3302375+03:00"
+      "lastUpdated": "2025-06-17T00:04:08.6197508+03:00"
+    },
+    {
+      "id": 8,
+      "platform": "Yeni Platform",
+      "url": "https://",
+      "icon": "\uD83C\uDF10",
+      "isActive": true,
+      "lastUpdated": "2025-06-17T00:04:12.2751371+03:00"
     }
   ],
   "contact": {
-    "email": "john.doe@example.com",
-    "phone": "\u002B90 555 123 45 672",
+    "emails": [],
+    "phones": [],
     "location": "\u0130stanbul, T\u00FCrkiye",
     "social": {
       "linkedIn": "",

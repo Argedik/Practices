@@ -115,8 +115,14 @@ public class PortfolioDataService
             },
             Contact = new ContactInfo
             {
-                Email = "john@example.com",
-                Phone = "+90 555 123 45 67",
+                Emails = new List<EmailContact>
+                {
+                    new EmailContact { Value = "john@example.com", Enabled = true }
+                },
+                Phones = new List<PhoneContact>
+                {
+                    new PhoneContact { Value = "+90 555 123 45 67", Enabled = true }
+                },
                 Location = "İstanbul, Türkiye",
                 Social = new SocialMedia
                 {

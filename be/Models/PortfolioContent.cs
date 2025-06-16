@@ -92,18 +92,6 @@ public class ContactInfo
     public SocialMedia Social { get; set; } = new();
 }
 
-public class EmailContact
-{
-    public string Value { get; set; } = "";
-    public bool Enabled { get; set; } = true;
-}
-
-public class PhoneContact
-{
-    public string Value { get; set; } = "";
-    public bool Enabled { get; set; } = true;
-}
-
 // Sosyal medya (eski format - geriye uyumluluk için)
 public class SocialMedia
 {
