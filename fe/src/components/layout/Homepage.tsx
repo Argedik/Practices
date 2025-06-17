@@ -259,43 +259,19 @@ export const Homepage = () => {
 	};
 
 	return (
-		<div
-			className={styles.homepage}
-			style={{
-				backgroundColor: '#0f172a',
-				minHeight: '100vh',
-				color: '#f1f5f9',
-			}}
-		>
+		<div className={styles.homepage}>
 			{/* Loading Indicator */}
 			{isLoading && (
-				<div
-					style={{
-						position: 'fixed',
-						top: '20px',
-						right: '20px',
-						background: 'var(--bg-glass)',
-						padding: '0.5rem 1rem',
-						borderRadius: 'var(--radius-lg)',
-						border: '1px solid var(--border-primary)',
-						zIndex: 1000,
-						display: 'flex',
-						alignItems: 'center',
-						gap: '0.5rem',
-					}}
-				>
-					<div
-						className="spinner"
-						style={{ width: '16px', height: '16px' }}
-					></div>
-					<span style={{ fontSize: '0.875rem' }}>
+				<div className={styles.loadingIndicator}>
+					<div className={styles.spinner}></div>
+					<span className={styles.loadingText}>
 						Backend&apos;den yükleniyor...
 					</span>
 				</div>
 			)}
 
 			{/* Portfolio Bölümleri */}
-			<div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+			<div className={styles.portfolioSections}>
 				<HeroSection
 					data={contentData.heroSection}
 					onUpdate={(data) => updateContentData({ heroSection: data })}
@@ -331,19 +307,7 @@ export const Homepage = () => {
 			</div>
 
 			{/* Alt Bar - Bilgi */}
-			<div
-				style={{
-					position: 'fixed',
-					bottom: '20px',
-					left: '20px',
-					background: 'var(--bg-glass)',
-					padding: '0.5rem 1rem',
-					borderRadius: 'var(--radius-lg)',
-					border: '1px solid var(--border-primary)',
-					fontSize: '0.75rem',
-					color: 'var(--text-secondary)',
-				}}
-			>
+			<div className={styles.infoBar}>
 				💡 Değişiklikler otomatik kaydedilir
 			</div>
 		</div>

@@ -1,9 +1,11 @@
 .homepage {
 	margin: 0 auto;
 	padding: 2rem;
-	min-height: 80vh;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	background-color: #0f172a;
+	color: #f1f5f9;
 }
 
 .header {
@@ -137,6 +139,47 @@
 		color: #95a5a6;
 		font-size: 0.9rem;
 	}
+}
+
+.loadingIndicator {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background: var(--bg-glass);
+	padding: 0.5rem 1rem;
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--border-primary);
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.spinner {
+	width: 16px;
+	height: 16px;
+}
+
+.loadingText {
+	font-size: 0.875rem;
+}
+
+.portfolioSections {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.infoBar {
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+	background: var(--bg-glass);
+	padding: 0.5rem 1rem;
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--border-primary);
+	font-size: 0.75rem;
+	color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {

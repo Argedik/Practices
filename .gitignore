@@ -6,3 +6,4 @@ be/bin/
 Cargo.lock
 target
 be/bin/Debug/net9.0
+fe/yarn.lock
